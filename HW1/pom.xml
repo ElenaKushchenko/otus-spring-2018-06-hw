@@ -19,6 +19,7 @@
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
         <spring.version>5.0.7.RELEASE</spring.version>
+        <aspectjweaver.version>1.9.1</aspectjweaver.version>
         <opencsv.version>4.2</opencsv.version>
         <caffeine.version>2.6.2</caffeine.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -36,6 +37,11 @@
             <artifactId>kotlin-reflect</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-maven-allopen</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -51,6 +57,16 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
         </dependency>
 
         <dependency>
@@ -73,7 +89,6 @@
     <build>
         <finalName>hw1</finalName>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -102,7 +117,6 @@
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-allopen</artifactId>
-                        <version>${kotlin.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

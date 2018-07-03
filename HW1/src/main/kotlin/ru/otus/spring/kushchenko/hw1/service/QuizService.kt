@@ -1,11 +1,13 @@
 package ru.otus.spring.kushchenko.hw1.service
 
-import ru.otus.spring.kushchenko.hw1.model.Question
+import ru.otus.spring.kushchenko.hw1.model.dto.QuestionDto
 
 /**
  * Created by Елена on Июль, 2018
  */
 interface QuizService {
-    fun getQuestions(): List<Question>
-    fun validateAnswers(answerMap: Map<Int, Int>): Int
+    fun getQuestion(id: Int): QuestionDto?
+    fun getQuestions(): List<QuestionDto>
+    fun checkAnswer(questionId: Int, answerNum: Int): Boolean
+    fun getCorrectAnswer(questionId: Int): Int
 }
