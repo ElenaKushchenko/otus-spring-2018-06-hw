@@ -1,0 +1,68 @@
+-- Author table creation
+DROP TABLE IF EXISTS Author;
+CREATE TABLE Author (
+  Id INT AUTO_INCREMENT,
+  Name VARCHAR(100) NOT NULL
+);
+ALTER TABLE Author ADD CONSTRAINT pk_Author PRIMARY KEY (Id);
+
+-- Genre table creation
+DROP TABLE IF EXISTS Genre;
+CREATE TABLE Genre (
+  Id INT AUTO_INCREMENT,
+  Name VARCHAR(50) NOT NULL
+);
+ALTER TABLE Genre ADD CONSTRAINT pk_Genre PRIMARY KEY (Id);
+
+-- Reader table creation
+DROP TABLE IF EXISTS Reader;
+CREATE TABLE Reader (
+  Id INT AUTO_INCREMENT,
+  Name VARCHAR(100) NOT NULL
+);
+ALTER TABLE Reader ADD CONSTRAINT pk_Reader PRIMARY KEY (Id);
+
+-- Book table creation
+DROP TABLE IF EXISTS Book;
+CREATE TABLE Book (
+  Id INT AUTO_INCREMENT,
+  Name VARCHAR(200) NOT NULL,
+  OriginalName VARCHAR(200),
+  Paperback INT,
+  ReaderId INT
+);
+ALTER TABLE Book ADD CONSTRAINT pk_Book PRIMARY KEY (Id);
+ALTER TABLE Book ADD CONSTRAINT fk_Book_ReaderId FOREIGN KEY (ReaderId) REFERENCES Reader(Id) ON DELETE SET NULL;
+
+-- Book-Author table creation
+DROP TABLE IF EXISTS BookAuthor;
+CREATE TABLE BookAuthor (
+  BookId INT NOT NULL,
+  AuthorId INT NOT NULL
+);
+ALTER TABLE BookAuthor ADD CONSTRAINT pk_BookAuthor PRIMARY KEY (BookId, AuthorId);
+ALTER TABLE BookAuthor ADD CONSTRAINT fk_BookAuthor_BookId FOREIGN KEY (BookId) REFERENCES Book(Id) ON DELETE CASCADE;
+ALTER TABLE BookAuthor ADD CONSTRAINT fk_BookAuthor_AuthorId FOREIGN KEY (AuthorId) REFERENCES Author(Id) ON DELETE CASCADE;
+
+-- Book-Genre table creation
+DROP TABLE IF EXISTS BookGenre;
+CREATE TABLE BookGenre (
+  BookId INT NOT NULL,
+  GenreId INT NOT NULL
+);
+ALTER TABLE BookGenre ADD CONSTRAINT pk_BookGenre PRIMARY KEY (BookId, GenreId);
+ALTER TABLE BookGenre ADD CONSTRAINT fk_BookGenre_BookId FOREIGN KEY (BookId) REFERENCES Book(Id) ON DELETE CASCADE;
+ALTER TABLE BookGenre ADD CONSTRAINT fk_BookGenre_GenreId FOREIGN KEY (GenreId) REFERENCES Genre(Id) ON DELETE CASCADE;
+
+-- Indexes creation
+DROP INDEX IF EXISTS ix_Author_Name;
+CREATE INDEX ix_Author_Name ON Author(Name);
+
+DROP INDEX IF EXISTS ix_Genre_Name;
+CREATE INDEX ix_Genre_Name ON Genre(Name);
+
+DROP INDEX IF EXISTS ix_Reader_Name;
+CREATE INDEX ix_Reader_Name ON Reader(Name);
+
+DROP INDEX IF EXISTS ix_Book_Name;
+CREATE INDEX ix_Book_Name ON Book(Name);
