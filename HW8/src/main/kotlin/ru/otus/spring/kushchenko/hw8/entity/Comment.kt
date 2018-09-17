@@ -1,6 +1,7 @@
 package ru.otus.spring.kushchenko.hw8.entity
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import org.springframework.data.mongodb.core.mapping.DBRef
 import java.time.LocalDateTime
 
 /**
@@ -11,6 +12,6 @@ data class Comment(
     var text: String,
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     val date: LocalDateTime? = LocalDateTime.now(),
-    val user: User,
-    var bookId: Int
+    @DBRef
+    val user: User
 )

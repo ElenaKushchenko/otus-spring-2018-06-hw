@@ -22,8 +22,8 @@ class BookServiceImpl(private val bookRepository: BookRepository) : BookService 
     override fun update(book: Book): Book {
         val id = book.id!!
 
-        if (bookRepository.existsById(id).not())
-            throw IllegalArgumentException("Book with id = $id not found")
+//        if (bookRepository.ex(id).not())
+//            throw IllegalArgumentException("Book with id = $id not found")
 
         return bookRepository.save(book)
     }

@@ -10,8 +10,4 @@ server:
   servlet:
     context-path: /library
 
-spring.data.mongodb.uri: "mongodb://otus-spring:12345\
-                          @sandbox-shard-00-00-cg92x.mongodb.net:27017,\
-                          sandbox-shard-00-01-cg92x.mongodb.net:27017,\
-                          sandbox-shard-00-02-cg92x.mongodb.net:27017\
-                          /test?ssl=true&replicaSet=Sandbox-shard-0&authSource=admin&retryWrites=true"
+spring.data.mongodb.uri: mongodb+srv://otus-spring:<PASS>@sandbox-cg92x.mongodb.net/library-app?retryWrites=true
