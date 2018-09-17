@@ -1,0 +1,17 @@
+logging:
+  level:
+    ru.otus.spring.kushchenko: INFO
+    org.springframework: WARN
+  file: logs/app.log
+  pattern.file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n'
+
+server:
+  port: 8877
+  servlet:
+    context-path: /library
+
+spring.data.mongodb.uri: "mongodb://otus-spring:12345\
+                          @sandbox-shard-00-00-cg92x.mongodb.net:27017,\
+                          sandbox-shard-00-01-cg92x.mongodb.net:27017,\
+                          sandbox-shard-00-02-cg92x.mongodb.net:27017\
+                          /test?ssl=true&replicaSet=Sandbox-shard-0&authSource=admin&retryWrites=true"
