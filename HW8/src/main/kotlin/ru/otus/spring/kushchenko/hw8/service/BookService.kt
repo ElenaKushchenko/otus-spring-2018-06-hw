@@ -7,8 +7,8 @@ import ru.otus.spring.kushchenko.hw8.entity.Book
  */
 interface BookService {
     fun getAll(): List<Book>
-    fun get(id: Int): Book
+    fun get(id: String): Book
     fun create(book: Book): Book
     fun update(book: Book): Book
-    fun delete(id: Int)
+    fun delete(id: String)
 }

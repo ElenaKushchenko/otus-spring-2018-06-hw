@@ -8,11 +8,11 @@ import ru.otus.spring.kushchenko.hw8.service.GenreService
 /**
  * Created by Елена on Июль, 2018
  */
-//@RestController
-//@RequestMapping("/genres")
-//class GenreController(private val service: GenreService) {
-//
-//    @GetMapping
-//    fun getGenres(): List<String> =
-//        service.getAll()
-//}
+@RestController
+@RequestMapping("/genres")
+class GenreController(private val service: GenreService) {
+
+    @GetMapping
+    fun getGenres(): List<String> =
+        service.getAll()
+}

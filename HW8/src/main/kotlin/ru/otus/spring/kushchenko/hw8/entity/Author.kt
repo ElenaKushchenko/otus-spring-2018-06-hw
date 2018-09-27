@@ -1,6 +1,9 @@
 package ru.otus.spring.kushchenko.hw8.entity
 
+import java.time.LocalDate
+
 data class Author(
-    val firstName: String,
-    val secondName: String
+    val name: String,
+    val country: String?,
+    val dayOfBirth: LocalDate?
 )

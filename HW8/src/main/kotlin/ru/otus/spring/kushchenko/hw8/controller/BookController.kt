@@ -20,7 +20,7 @@ class BookController(private val service: BookService) {
         service.getAll()
 
     @GetMapping("/{id}")
-    fun get(@PathVariable("id") id: Int): Book =
+    fun get(@PathVariable("id") id: String): Book =
         service.get(id)
 
 //    @PostMapping
@@ -33,6 +33,6 @@ class BookController(private val service: BookService) {
 //        service.update(Book(book, id))
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable("id") id: Int) =
+    fun delete(@PathVariable("id") id: String) =
         service.delete(id)
 }

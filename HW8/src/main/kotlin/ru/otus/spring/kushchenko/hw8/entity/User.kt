@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "users")
 data class User(
     @Id
-    val id: Int? = null,
+    val id: String? = null,
     @Indexed(unique = true)
     var name: String? = null
 )

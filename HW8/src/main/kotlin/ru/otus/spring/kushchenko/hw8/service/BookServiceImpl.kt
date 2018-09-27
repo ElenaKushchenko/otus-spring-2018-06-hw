@@ -14,7 +14,7 @@ import java.lang.IllegalArgumentException
 class BookServiceImpl(private val bookRepository: BookRepository) : BookService {
     override fun getAll(): List<Book> = bookRepository.findAll()
 
-    override fun get(id: Int): Book = bookRepository.findById(id)
+    override fun get(id: String): Book = bookRepository.findById(id)
         .orElseThrow { IllegalArgumentException("Book with id = $id not found") }
 
     override fun create(book: Book): Book = bookRepository.save(book)
@@ -22,11 +22,11 @@ class BookServiceImpl(private val bookRepository: BookRepository) : BookService 
     override fun update(book: Book): Book {
         val id = book.id!!
 
-//        if (bookRepository.ex(id).not())
-//            throw IllegalArgumentException("Book with id = $id not found")
+        if (bookRepository.existsById(id).not())
+            throw IllegalArgumentException("Book with id = $id not found")
 
         return bookRepository.save(book)
     }
 
-    override fun delete(id: Int) = bookRepository.deleteById(id)
+    override fun delete(id: String) = bookRepository.deleteById(id)
 }
