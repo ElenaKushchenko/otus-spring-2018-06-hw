@@ -8,7 +8,7 @@ import ru.otus.spring.kushchenko.hw8.model.Comment
  */
 interface CommentService {
     fun getAll(): List<Comment>
-    fun getFiltered(userId: String?, bookId: String?, page: Int, count: Int): Page<Comment>
+    fun getFiltered(userId: String?, bookId: String?, page: Int, size: Int, sortBy: String, dir: String): Page<Comment>
     fun get(id: String): Comment
     fun create(comment: Comment): Comment
     fun update(comment: Comment): Comment

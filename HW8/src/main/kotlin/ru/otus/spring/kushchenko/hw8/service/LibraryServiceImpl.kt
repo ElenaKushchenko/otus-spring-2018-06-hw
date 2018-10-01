@@ -22,12 +22,12 @@ class LibraryServiceImpl(
         val book = bookRepository.findById(bookId)
             .orElseThrow { IllegalArgumentException("Book with id = $bookId not found") }
 
-        if (book.userId != null) throw IllegalStateException("Book with id = $bookId already taken")
+        if (book.user != null) throw IllegalStateException("Book with id = $bookId already taken")
 
         val user = userRepository.findById(userId)
             .orElseThrow { IllegalArgumentException("User with id = $bookId not found") }
 
-        book.userId = user.id
+        book.user = user
         bookRepository.save(book)
     }
 
@@ -37,12 +37,12 @@ class LibraryServiceImpl(
         val book = bookRepository.findById(bookId)
             .orElseThrow { IllegalArgumentException("Book with id = $bookId not found") }
 
-        book.userId ?: throw IllegalStateException("Book with id = $bookId already free")
+        book.user ?: throw IllegalStateException("Book with id = $bookId already free")
 
         val user = userRepository.findById(userId)
             .orElseThrow { IllegalArgumentException("User with id = $bookId not found") }
 
-        book.userId = null
+        book.user = null
         bookRepository.save(book)
     }
 }

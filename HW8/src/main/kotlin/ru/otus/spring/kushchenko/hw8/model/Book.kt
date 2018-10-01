@@ -11,11 +11,11 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class Book(
     @Id
     val id: String? = null,
-    var name: String,
-    var originalName: String? = null,
-    var paperback: Int? = null,
-    var authors: List<Author>? = emptyList(),
-    var genres: List<String>? = emptyList(),
+    val name: String,
+    val originalName: String? = null,
+    val paperback: Int? = null,
+    val authors: List<Author>? = emptyList(),
+    val genres: List<String>? = emptyList(),
     @DBRef
-    var userId: String? = null
+    var user: User? = null
 )

@@ -13,11 +13,11 @@ import java.time.LocalDateTime
 data class Comment(
     @Id
     val id: String? = null,
-    var text: String,
+    val text: String,
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     val date: LocalDateTime? = LocalDateTime.now(),
     @DBRef
-    val userId: String,
+    var user: User,
     @DBRef
-    val bookId: String
+    var book: Book
 )

@@ -18,12 +18,14 @@ class CommentController(private val service: CommentService) {
 
     @GetMapping("/paged")
     fun getFiltered(
-        @PathVariable(required = false) userId: String?,
-        @PathVariable(required = false) bookId: String?,
-        @PathVariable(required = false) page: Int?,
-        @PathVariable(required = false) count: Int?
+        @RequestParam(value = "userId", required = false) userId: String?,
+        @RequestParam(value = "bookId", required = false) bookId: String?,
+        @RequestParam(value = "page", required = false, defaultValue = "1") page: Int,
+        @RequestParam(value = "size", required = false, defaultValue = "20") size: Int,
+        @RequestParam(value = "sortBy", required = false, defaultValue = "name") sortBy: String,
+        @RequestParam(value = "dir", required = false, defaultValue = "ASC") dir: String
     ): Page<Comment> =
-        service.getFiltered(userId, bookId, page ?: 1, count ?: 20)
+        service.getFiltered(userId, bookId, page, size, sortBy, dir)
 
     @GetMapping("/{id}")
     fun get(@PathVariable("id") id: String): Comment =

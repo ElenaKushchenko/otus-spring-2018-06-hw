@@ -2,44 +2,55 @@ package ru.otus.spring.kushchenko.hw8.service
 
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.otus.spring.kushchenko.hw8.model.Book
 import ru.otus.spring.kushchenko.hw8.repository.BookRepository
-import java.lang.IllegalArgumentException
+import ru.otus.spring.kushchenko.hw8.repository.UserRepository
 
 /**
  * Created by Елена on Июль, 2018
  */
 @Service
-class BookServiceImpl(private val repository: BookRepository) : BookService {
-    override fun getAll(): List<Book> = repository.findAll()
+class BookServiceImpl(private val bookRepository: BookRepository,
+                      private val userRepository: UserRepository) : BookService {
+    override fun getAll(): List<Book> = bookRepository.findAll()
 
-    override fun getPaged(page: Int, count: Int): Page<Book> {
-        val pageable = PageRequest.of(page - 1, count)
+    override fun getPaged(page: Int, size: Int, sortBy: String, dir: String): Page<Book> {
+        val pageable = PageRequest.of(
+            page - 1,
+            size,
+            Sort(Sort.Direction.valueOf(dir), sortBy)
+        )
 
-        return repository.findAll(pageable)
+        return bookRepository.findAll(pageable)
     }
 
-    override fun get(id: String): Book = repository.findById(id)
+    override fun get(id: String): Book = bookRepository.findById(id)
         .orElseThrow { IllegalArgumentException("Book with id = $id not found") }
 
     override fun create(book: Book): Book {
         book.id?.let {
-            if (repository.existsById(it))
+            if (bookRepository.existsById(it))
                 throw IllegalArgumentException("Book with id = $it already exists")
         }
+        book.user?.let {
+            val user = userRepository.findById(it.id!!)
+                .orElseThrow { IllegalArgumentException("User with id = ${it.id} not found") }
+            book.user = user
+        }
 
-        return repository.save(book)
+        return bookRepository.save(book)
     }
 
     override fun update(book: Book): Book {
         val id = book.id!!
 
-        if (repository.existsById(id).not())
+        if (bookRepository.existsById(id).not())
             throw IllegalArgumentException("Book with id = $id not found")
 
-        return repository.save(book)
+        return bookRepository.save(book)
     }
 
-    override fun delete(id: String) = repository.deleteById(id)
+    override fun delete(id: String) = bookRepository.deleteById(id)
 }

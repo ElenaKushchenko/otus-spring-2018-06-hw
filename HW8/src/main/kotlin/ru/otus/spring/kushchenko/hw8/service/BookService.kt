@@ -8,7 +8,7 @@ import ru.otus.spring.kushchenko.hw8.model.Book
  */
 interface BookService {
     fun getAll(): List<Book>
-    fun getPaged(page: Int, count: Int): Page<Book>
+    fun getPaged(page: Int, size: Int, sortBy: String, dir: String): Page<Book>
     fun get(id: String): Book
     fun create(book: Book): Book
     fun update(book: Book): Book

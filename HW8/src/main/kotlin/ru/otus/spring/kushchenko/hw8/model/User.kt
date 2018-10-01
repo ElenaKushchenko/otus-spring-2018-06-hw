@@ -12,5 +12,5 @@ data class User(
     @Id
     val id: String? = null,
     @Indexed(unique = true)
-    var name: String
+    val name: String
 )
