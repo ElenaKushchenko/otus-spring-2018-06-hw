@@ -3,7 +3,7 @@ package ru.otus.spring.kushchenko.hw8.repository
 import com.mongodb.DBObject
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.stereotype.Repository
-import ru.otus.spring.kushchenko.hw8.entity.Author
+import ru.otus.spring.kushchenko.hw8.model.Author
 import java.time.ZoneId
 import java.util.Date
 

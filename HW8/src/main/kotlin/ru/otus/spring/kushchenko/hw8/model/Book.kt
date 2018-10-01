@@ -1,4 +1,4 @@
-package ru.otus.spring.kushchenko.hw8.entity
+package ru.otus.spring.kushchenko.hw8.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.DBRef
@@ -17,6 +17,5 @@ data class Book(
     var authors: List<Author>? = emptyList(),
     var genres: List<String>? = emptyList(),
     @DBRef
-    var user: User? = null,
-    var comments: List<Comment>? = emptyList()
+    var userId: String? = null
 )

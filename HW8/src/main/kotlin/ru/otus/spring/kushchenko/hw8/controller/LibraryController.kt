@@ -10,21 +10,21 @@ import ru.otus.spring.kushchenko.hw8.service.LibraryService
 /**
  * Created by Елена on Июль, 2018
  */
-//@RestController
-//@RequestMapping("/library")
-//class LibraryController(private val service: LibraryService) {
-//
-//    @PostMapping("/take")
-//    fun takeBook(
-//        @RequestParam("bookId") bookId: Int,
-//        @RequestParam("userId") userId: Int
-//    ) =
-//        service.takeBook(bookId, userId)
-//
-//    @DeleteMapping("/return")
-//    fun returnBook(
-//        @RequestParam("bookId") bookId: Int,
-//        @RequestParam("userId") userId: Int
-//    ) =
-//        service.returnBook(bookId, userId)
-//}
+@RestController
+@RequestMapping("/library")
+class LibraryController(private val service: LibraryService) {
+
+    @PostMapping("/take")
+    fun takeBook(
+        @RequestParam("bookId") bookId: String,
+        @RequestParam("userId") userId: String
+    ) =
+        service.takeBook(bookId, userId)
+
+    @DeleteMapping("/return")
+    fun returnBook(
+        @RequestParam("bookId") bookId: String,
+        @RequestParam("userId") userId: String
+    ) =
+        service.returnBook(bookId, userId)
+}

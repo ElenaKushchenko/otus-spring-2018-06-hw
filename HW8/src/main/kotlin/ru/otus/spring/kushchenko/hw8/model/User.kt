@@ -1,4 +1,4 @@
-package ru.otus.spring.kushchenko.hw8.entity
+package ru.otus.spring.kushchenko.hw8.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
@@ -12,5 +12,5 @@ data class User(
     @Id
     val id: String? = null,
     @Indexed(unique = true)
-    var name: String? = null
+    var name: String
 )

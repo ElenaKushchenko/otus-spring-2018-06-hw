@@ -1,14 +1,16 @@
 package ru.otus.spring.kushchenko.hw8.service
 
-import ru.otus.spring.kushchenko.hw8.entity.Comment
+import org.springframework.data.domain.Page
+import ru.otus.spring.kushchenko.hw8.model.Comment
 
 /**
  * Created by Елена on Июль, 2018
  */
 interface CommentService {
     fun getAll(): List<Comment>
-    fun get(id: Int): Comment
+    fun getFiltered(userId: String?, bookId: String?, page: Int, count: Int): Page<Comment>
+    fun get(id: String): Comment
     fun create(comment: Comment): Comment
     fun update(comment: Comment): Comment
-    fun delete(id: Int)
+    fun delete(id: String)
 }
