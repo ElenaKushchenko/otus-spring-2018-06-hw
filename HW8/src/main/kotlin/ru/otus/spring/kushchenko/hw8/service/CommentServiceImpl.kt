@@ -27,8 +27,8 @@ class CommentServiceImpl(
     override fun getFiltered(userId: String?, bookId: String?, page: Int, size: Int, sortBy: String, dir: String): Page<Comment> {
         val query = Query()
 
-        userId?.run { query.addCriteria(Criteria.where("user.\$id").`is`(userId))  }
-        bookId?.run { query.addCriteria(Criteria.where("book.\$id").`is`(bookId))  }
+        userId?.run { query.addCriteria(Criteria.where("user.id").`is`(userId))  }
+        bookId?.run { query.addCriteria(Criteria.where("book.id").`is`(bookId))  }
 
         val pageable = PageRequest.of(
             page - 1,
@@ -66,6 +66,13 @@ class CommentServiceImpl(
 
         if (commentRepository.existsById(id).not())
             throw IllegalArgumentException("Comment with id = $id not found")
+
+        val user = userRepository.findById(comment.user.id!!)
+            .orElseThrow { IllegalArgumentException("User with id = ${comment.user.id} not found") }
+        val book = bookRepository.findById(comment.book.id!!)
+            .orElseThrow { IllegalArgumentException("Book with id = ${comment.book.id} not found") }
+        comment.user = user
+        comment.book = book
 
         return commentRepository.save(comment)
     }

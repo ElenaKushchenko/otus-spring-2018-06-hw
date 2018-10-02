@@ -49,6 +49,12 @@ class BookServiceImpl(private val bookRepository: BookRepository,
         if (bookRepository.existsById(id).not())
             throw IllegalArgumentException("Book with id = $id not found")
 
+        book.user?.let {
+            val user = userRepository.findById(it.id!!)
+                .orElseThrow { IllegalArgumentException("User with id = ${it.id} not found") }
+            book.user = user
+        }
+
         return bookRepository.save(book)
     }
 
