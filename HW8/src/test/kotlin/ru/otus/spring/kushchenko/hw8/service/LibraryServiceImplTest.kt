@@ -5,6 +5,7 @@ import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
 import com.nhaarman.mockito_kotlin.whenever
 import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import ru.otus.spring.kushchenko.hw8.model.Book
@@ -20,6 +21,7 @@ class LibraryServiceImplTest {
     private val service = LibraryServiceImpl(bookRepository, userRepository)
 
     @Nested
+    @DisplayName("Tests for takeBook() method")
     inner class TakeBook {
 
         @Test
@@ -97,6 +99,7 @@ class LibraryServiceImplTest {
     }
 
     @Nested
+    @DisplayName("Tests for returnBook() method")
     inner class ReturnBook {
 
         @Test
