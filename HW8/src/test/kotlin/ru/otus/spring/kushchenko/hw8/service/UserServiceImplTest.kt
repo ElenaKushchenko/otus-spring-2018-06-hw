@@ -33,6 +33,7 @@ class UserServiceImplTest {
     @Nested
     @DisplayName("Tests for get() method")
     inner class Get {
+
         @Test
         fun shouldPassSuccessfully() {
             val userId = "1"
@@ -63,6 +64,7 @@ class UserServiceImplTest {
     @Nested
     @DisplayName("Tests for create() method")
     inner class Create {
+
         @Test
         fun shouldPassSuccessfully() {
             val userId = "1"
@@ -96,6 +98,7 @@ class UserServiceImplTest {
     @Nested
     @DisplayName("Tests for update() method")
     inner class Update {
+
         @Test
         fun shouldPassSuccessfully() {
             val userId = "1"
