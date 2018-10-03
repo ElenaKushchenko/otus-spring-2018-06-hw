@@ -1,7 +1,7 @@
 package ru.otus.spring.kushchenko.hw7.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
-import ru.otus.spring.kushchenko.hw7.entity.Comment
+import ru.otus.spring.kushchenko.hw7.model.Comment
 
 /**
  * Created by Елена on Июль, 2018

@@ -1,6 +1,6 @@
 package ru.otus.spring.kushchenko.hw7.service
 
-import ru.otus.spring.kushchenko.hw7.entity.Genre
+import ru.otus.spring.kushchenko.hw7.model.Genre
 
 /**
  * Created by Елена on Июль, 2018

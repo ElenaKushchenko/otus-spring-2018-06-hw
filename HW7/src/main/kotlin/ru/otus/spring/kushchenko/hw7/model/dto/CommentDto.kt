@@ -1,4 +1,4 @@
-package ru.otus.spring.kushchenko.hw7.dto
+package ru.otus.spring.kushchenko.hw7.model.dto
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDateTime
@@ -6,10 +6,11 @@ import java.time.LocalDateTime
 /**
  * Created by Елена on Авг., 2018
  */
-data class CommentRequest(
-    var text: String,
+data class CommentDto(
+    val id: Int? = null,
+    var text: String? = null,
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     val date: LocalDateTime? = null,
-    val userId: Int,
-    val bookId: Int
+    val userId: Int? = null,
+    val bookId: Int? = null
 )

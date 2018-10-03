@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import ru.otus.spring.kushchenko.hw7.dto.UserRequest
-import ru.otus.spring.kushchenko.hw7.entity.User
+import ru.otus.spring.kushchenko.hw7.model.User
 import ru.otus.spring.kushchenko.hw7.service.UserService
 
 /**
@@ -28,13 +27,13 @@ class UserController(private val service: UserService) {
         service.get(id)
 
     @PostMapping
-    fun create(@RequestBody user: UserRequest): User =
-        service.create(User(user))
+    fun create(@RequestBody user: User): User =
+        service.create(user)
 
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: Int,
-               @RequestBody user: UserRequest): User =
-        service.update(User(user, id))
+               @RequestBody user: User): User =
+        service.update(user.copy(id = id))
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Int) =

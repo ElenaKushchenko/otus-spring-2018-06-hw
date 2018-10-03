@@ -2,9 +2,8 @@ package ru.otus.spring.kushchenko.hw7.service
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import ru.otus.spring.kushchenko.hw7.entity.Author
+import ru.otus.spring.kushchenko.hw7.model.Author
 import ru.otus.spring.kushchenko.hw7.repository.AuthorRepository
-import java.lang.IllegalArgumentException
 
 /**
  * Created by Елена on Июль, 2018

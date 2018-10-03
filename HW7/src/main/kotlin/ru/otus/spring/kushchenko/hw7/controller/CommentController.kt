@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import ru.otus.spring.kushchenko.hw7.dto.CommentRequest
-import ru.otus.spring.kushchenko.hw7.entity.Comment
+import ru.otus.spring.kushchenko.hw7.model.dto.CommentDto
 import ru.otus.spring.kushchenko.hw7.service.CommentService
 
 /**
@@ -20,21 +19,21 @@ import ru.otus.spring.kushchenko.hw7.service.CommentService
 class CommentController(private val service: CommentService) {
 
     @GetMapping
-    fun getAll(): List<Comment> =
+    fun getAll(): List<CommentDto> =
         service.getAll()
 
     @GetMapping("/{id}")
-    fun get(@PathVariable("id") id: Int): Comment =
+    fun get(@PathVariable("id") id: Int): CommentDto =
         service.get(id)
 
     @PostMapping
-    fun create(@RequestBody comment: CommentRequest): Comment =
-        service.create(Comment(comment))
+    fun create(@RequestBody comment: CommentDto): CommentDto =
+        service.create(comment)
 
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: Int,
-               @RequestBody comment: CommentRequest): Comment =
-        service.update(Comment(comment, id))
+               @RequestBody comment: CommentDto): CommentDto =
+        service.update(comment.copy(id = id))
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Int) =

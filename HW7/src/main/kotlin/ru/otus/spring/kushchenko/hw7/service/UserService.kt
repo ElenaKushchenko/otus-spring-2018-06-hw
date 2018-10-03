@@ -1,6 +1,6 @@
 package ru.otus.spring.kushchenko.hw7.service
 
-import ru.otus.spring.kushchenko.hw7.entity.User
+import ru.otus.spring.kushchenko.hw7.model.User
 
 /**
  * Created by Елена on Июль, 2018

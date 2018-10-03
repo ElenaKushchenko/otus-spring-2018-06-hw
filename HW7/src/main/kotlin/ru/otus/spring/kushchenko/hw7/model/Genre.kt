@@ -1,6 +1,5 @@
-package ru.otus.spring.kushchenko.hw7.entity
+package ru.otus.spring.kushchenko.hw7.model
 
-import ru.otus.spring.kushchenko.hw7.dto.GenreRequest
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -21,6 +20,4 @@ data class Genre(
 
     @Column(name = "Name", nullable = false)
     var name: String? = null
-) {
-    constructor(dto: GenreRequest, id: Int? = null): this(id = id, name = dto.name)
-}
+)

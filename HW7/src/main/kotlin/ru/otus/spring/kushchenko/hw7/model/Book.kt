@@ -1,8 +1,5 @@
-package ru.otus.spring.kushchenko.hw7.entity
+package ru.otus.spring.kushchenko.hw7.model
 
-import org.hibernate.annotations.LazyCollection
-import org.hibernate.annotations.LazyCollectionOption
-import ru.otus.spring.kushchenko.hw7.dto.BookRequest
 import javax.persistence.CascadeType.REFRESH
 import javax.persistence.CascadeType.REMOVE
 import javax.persistence.Column
@@ -63,13 +60,4 @@ data class Book(
     @OneToMany(cascade = [REMOVE])
     @JoinColumn(name = "BookId", insertable = false)
     var comments: List<Comment>? = emptyList()
-) {
-    constructor(dto: BookRequest, id: Int? = null) : this(
-        id = id,
-        name = dto.name,
-        originalName = dto.originalName,
-        paperback = dto.paperback,
-        authors = dto.authorIds?.map { Author(id = it) },
-        genres = dto.genreIds?.map { Genre(id = it) }
-    )
-}
+)

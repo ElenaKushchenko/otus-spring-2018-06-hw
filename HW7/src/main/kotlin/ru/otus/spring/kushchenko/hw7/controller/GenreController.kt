@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import ru.otus.spring.kushchenko.hw7.dto.GenreRequest
-import ru.otus.spring.kushchenko.hw7.entity.Genre
+import ru.otus.spring.kushchenko.hw7.model.Genre
 import ru.otus.spring.kushchenko.hw7.service.GenreService
 
 /**
@@ -28,13 +27,13 @@ class GenreController(private val service: GenreService) {
         service.get(id)
 
     @PostMapping
-    fun create(@RequestBody genre: GenreRequest): Genre =
-        service.create(Genre(genre))
+    fun create(@RequestBody genre: Genre): Genre =
+        service.create(genre)
 
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: Int,
-               @RequestBody genre: GenreRequest): Genre =
-        service.update(Genre(genre, id))
+               @RequestBody genre: Genre): Genre =
+        service.update(genre.copy(id = id))
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Int) =

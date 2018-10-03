@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import ru.otus.spring.kushchenko.hw7.dto.AuthorRequest
-import ru.otus.spring.kushchenko.hw7.entity.Author
+import ru.otus.spring.kushchenko.hw7.model.Author
 import ru.otus.spring.kushchenko.hw7.service.AuthorService
 
 /**
@@ -28,13 +27,13 @@ class AuthorController(private val service: AuthorService) {
         service.get(id)
 
     @PostMapping
-    fun create(@RequestBody author: AuthorRequest): Author =
-        service.create(Author(author))
+    fun create(@RequestBody author: Author): Author =
+        service.create(author)
 
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: Int,
-               @RequestBody author: AuthorRequest): Author =
-        service.update(Author(author, id))
+               @RequestBody author: Author): Author =
+        service.update(author.copy(id = id))
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Int) =

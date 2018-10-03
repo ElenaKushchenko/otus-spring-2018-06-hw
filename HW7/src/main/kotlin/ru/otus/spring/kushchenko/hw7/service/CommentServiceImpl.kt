@@ -2,9 +2,8 @@ package ru.otus.spring.kushchenko.hw7.service
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import ru.otus.spring.kushchenko.hw7.entity.Comment
+import ru.otus.spring.kushchenko.hw7.model.Comment
 import ru.otus.spring.kushchenko.hw7.repository.CommentRepository
-import java.lang.IllegalArgumentException
 
 /**
  * Created by Елена on Июль, 2018

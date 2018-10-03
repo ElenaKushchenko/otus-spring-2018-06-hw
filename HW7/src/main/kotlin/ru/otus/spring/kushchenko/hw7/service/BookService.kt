@@ -1,6 +1,6 @@
 package ru.otus.spring.kushchenko.hw7.service
 
-import ru.otus.spring.kushchenko.hw7.entity.Book
+import ru.otus.spring.kushchenko.hw7.model.Book
 
 /**
  * Created by Елена on Июль, 2018

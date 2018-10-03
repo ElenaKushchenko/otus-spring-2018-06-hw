@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import ru.otus.spring.kushchenko.hw7.dto.BookRequest
-import ru.otus.spring.kushchenko.hw7.entity.Book
+import ru.otus.spring.kushchenko.hw7.mapper.BookMapper.toDto
+import ru.otus.spring.kushchenko.hw7.mapper.BookMapper.toEntity
+import ru.otus.spring.kushchenko.hw7.model.dto.BookDto
 import ru.otus.spring.kushchenko.hw7.service.BookService
 
 /**
@@ -20,21 +21,21 @@ import ru.otus.spring.kushchenko.hw7.service.BookService
 class BookController(private val service: BookService) {
 
     @GetMapping
-    fun getAll(): List<Book> =
-        service.getAll()
+    fun getAll(): List<BookDto> =
+        service.getAll().map { it.toDto() }
 
     @GetMapping("/{id}")
-    fun get(@PathVariable("id") id: Int): Book =
-        service.get(id)
+    fun get(@PathVariable("id") id: Int): BookDto =
+        service.get(id).toDto()
 
     @PostMapping
-    fun create(@RequestBody book: BookRequest): Book =
-        service.create(Book(book))
+    fun create(@RequestBody book: BookDto): BookDto =
+        service.create(book.toEntity()).toDto()
 
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: Int,
-               @RequestBody book: BookRequest): Book =
-        service.update(Book(book, id))
+               @RequestBody book: BookDto): BookDto =
+        service.update(book.copy(id = id).toEntity()).toDto()
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: Int) =

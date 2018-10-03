@@ -1,7 +1,6 @@
-package ru.otus.spring.kushchenko.hw7.entity
+package ru.otus.spring.kushchenko.hw7.model
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import ru.otus.spring.kushchenko.hw7.dto.CommentRequest
 import java.time.LocalDateTime
 import javax.persistence.CascadeType.REFRESH
 import javax.persistence.Column
@@ -25,7 +24,7 @@ data class Comment(
     val id: Int? = null,
 
     @Column(name = "Text", nullable = false)
-    var text: String,
+    var text: String? = null,
 
     @Column(name = "Date", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -33,16 +32,8 @@ data class Comment(
 
     @ManyToOne(cascade = [REFRESH])
     @JoinColumn(name = "UserId", nullable = false)
-    val user: User,
+    val user: User? = null,
 
     @Column(name = "BookId", nullable = false)
-    var bookId: Int
-) {
-    constructor(dto: CommentRequest, id: Int? = null) : this(
-        id = id,
-        text = dto.text,
-        date = dto.date,
-        user = User(id = dto.userId),
-        bookId = dto.bookId
-    )
-}
+    var bookId: Int? = null
+)
