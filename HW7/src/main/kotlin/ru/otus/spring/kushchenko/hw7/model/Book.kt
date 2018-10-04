@@ -11,7 +11,6 @@ import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.JoinTable
 import javax.persistence.ManyToMany
-import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 import javax.persistence.Table
 
@@ -52,10 +51,6 @@ data class Book(
         inverseJoinColumns = [JoinColumn(name = "GenreId")]
     )
     var genres: List<Genre>? = emptyList(),
-
-    @ManyToOne
-    @JoinColumn(name = "UserId", insertable = false)
-    var user: User? = null,
 
     @OneToMany(cascade = [REMOVE])
     @JoinColumn(name = "BookId", insertable = false)

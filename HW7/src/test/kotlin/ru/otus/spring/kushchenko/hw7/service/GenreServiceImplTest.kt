@@ -22,7 +22,7 @@
 //    private val service = GenreServiceImpl(repository)
 //
 //    @Test
-//    fun getAll() {
+//    fun getShortBooks() {
 //        val genres = listOf(
 //            Genre(1, "Genre1"),
 //            Genre(2, "Genre2")
@@ -30,7 +30,7 @@
 //
 //        whenever(repository.findAll()).thenReturn(genres)
 //
-//        assertEquals(genres, service.getAll())
+//        assertEquals(genres, service.getShortBooks())
 //
 //        verify(repository).findAll()
 //        verifyNoMoreInteractions(repository)

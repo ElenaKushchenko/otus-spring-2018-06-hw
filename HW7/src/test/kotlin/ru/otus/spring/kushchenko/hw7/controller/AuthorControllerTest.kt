@@ -37,13 +37,13 @@
 //    private lateinit var service: AuthorService
 //
 //    @Test
-//    fun getAll() {
+//    fun getShortBooks() {
 //        val authors = listOf(
 //            Author(1, "Author1"),
 //            Author(2, "Author2")
 //        )
 //
-//        whenever(service.getAll()).thenReturn(authors)
+//        whenever(service.getShortBooks()).thenReturn(authors)
 //
 //        mockMvc.perform(get(BASE_URL))
 //            .andExpect(status().isOk)
@@ -51,7 +51,7 @@
 //            .andExpect(content().json(authors.asJsonString()))
 //            .andReturn().response
 //
-//        verify(service).getAll()
+//        verify(service).getShortBooks()
 //        verifyNoMoreInteractions(service)
 //    }
 //

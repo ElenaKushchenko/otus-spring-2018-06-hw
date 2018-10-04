@@ -21,7 +21,7 @@
 //    private val service = UserServiceImpl(repository)
 //
 //    @Test
-//    fun getAll() {
+//    fun getShortBooks() {
 //        val users = listOf(
 //            User(1, "Reader1"),
 //            User(2, "Reader2")
@@ -29,7 +29,7 @@
 //
 //        whenever(repository.findAll()).thenReturn(users)
 //
-//        assertEquals(users, service.getAll())
+//        assertEquals(users, service.getShortBooks())
 //
 //        verify(repository).findAll()
 //        verifyNoMoreInteractions(repository)

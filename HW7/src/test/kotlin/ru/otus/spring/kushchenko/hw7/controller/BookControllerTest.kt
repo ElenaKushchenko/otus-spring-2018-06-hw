@@ -42,7 +42,7 @@
 //    private lateinit var service: BookService
 //
 //    @Test
-//    fun getAll() {
+//    fun getShortBooks() {
 //        val author1 = Author(1, "Author1")
 //        val author2 = Author(2, "Author2")
 //        val author3 = Author(3, "Author3")
@@ -77,7 +77,7 @@
 //            )
 //        )
 //
-//        whenever(service.getAll()).thenReturn(books)
+//        whenever(service.getShortBooks()).thenReturn(books)
 //
 //        mockMvc.perform(get(BASE_URL))
 //            .andExpect(status().isOk)
@@ -85,7 +85,7 @@
 //            .andExpect(content().json(books.asJsonString()))
 //            .andReturn().response
 //
-//        verify(service).getAll()
+//        verify(service).getShortBooks()
 //        verifyNoMoreInteractions(service)
 //    }
 //

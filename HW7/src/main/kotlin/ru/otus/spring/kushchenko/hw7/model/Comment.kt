@@ -32,8 +32,5 @@ data class Comment(
 
     @ManyToOne(cascade = [REFRESH])
     @JoinColumn(name = "UserId", nullable = false)
-    val user: User? = null,
-
-    @Column(name = "BookId", nullable = false)
-    var bookId: Int? = null
+    val user: User? = null
 )

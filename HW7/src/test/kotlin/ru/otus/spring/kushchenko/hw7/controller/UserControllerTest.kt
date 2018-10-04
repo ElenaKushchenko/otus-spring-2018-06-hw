@@ -37,13 +37,13 @@
 //    private lateinit var service: UserService
 //
 //    @Test
-//    fun getAll() {
+//    fun getShortBooks() {
 //        val users = listOf(
 //            User(1, "User1"),
 //            User(2, "User2")
 //        )
 //
-//        whenever(service.getAll()).thenReturn(users)
+//        whenever(service.getShortBooks()).thenReturn(users)
 //
 //        mockMvc.perform(get(BASE_URL))
 //            .andExpect(status().isOk)
@@ -52,7 +52,7 @@
 //            .andReturn().response
 //
 //
-//        verify(service).getAll()
+//        verify(service).getShortBooks()
 //        verifyNoMoreInteractions(service)
 //    }
 //

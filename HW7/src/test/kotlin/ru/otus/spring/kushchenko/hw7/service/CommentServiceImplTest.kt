@@ -23,7 +23,7 @@
 //    private val service = CommentServiceImpl(repository)
 //
 //    @Test
-//    fun getAll() {
+//    fun getShortBooks() {
 //        val user1 = User(1, "User1")
 //        val user2 = User(2, "User2")
 //
@@ -34,7 +34,7 @@
 //
 //        whenever(repository.findAll()).thenReturn(comments)
 //
-//        assertEquals(comments, service.getAll())
+//        assertEquals(comments, service.getShortBooks())
 //
 //        verify(repository).findAll()
 //        verifyNoMoreInteractions(repository)
