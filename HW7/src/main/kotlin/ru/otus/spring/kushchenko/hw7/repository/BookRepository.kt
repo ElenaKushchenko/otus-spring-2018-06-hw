@@ -15,7 +15,17 @@ interface BookRepository : JpaRepository<Book, Int> {
     @Query("select b from Book b")
     fun findAllShortBooks(): List<ShortBook>
 
-    @Query("select b from Book b join Author a join Genre where a.Id = :authorId")
+    @Query(
+        """
+        SELECT b
+        FROM Book b
+          JOIN Author a
+          JOIN Genre g 
+        WHERE (:name IS NULL OR b.name = :name)
+          AND (:authorId IS NULL OR a.id = :authorId)
+          AND (:genreId IS NULL OR g.id = :genreId)
+    """
+    )
     fun find(
         @Param("name") name: String?,
         @Param("authorId") authorId: Int?,

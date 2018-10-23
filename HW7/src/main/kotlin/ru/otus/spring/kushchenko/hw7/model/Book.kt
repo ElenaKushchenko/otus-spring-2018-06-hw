@@ -35,7 +35,7 @@ data class Book(
     @Column(name = "Paperback")
     var paperback: Int? = null,
 
-    @ManyToMany(cascade = [REFRESH], fetch = FetchType.EAGER)
+    @ManyToMany(cascade = [REFRESH])
     @JoinTable(
         name = "BookAuthor",
         schema = "otus_spring",
@@ -44,7 +44,7 @@ data class Book(
     )
     var authors: List<Author>? = emptyList(),
 
-    @ManyToMany(cascade = [REFRESH], fetch = FetchType.EAGER)
+    @ManyToMany(cascade = [REFRESH])
     @JoinTable(
         name = "BookGenre",
         schema = "otus_spring",

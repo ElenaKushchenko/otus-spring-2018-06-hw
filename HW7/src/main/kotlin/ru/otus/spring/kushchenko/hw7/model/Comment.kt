@@ -25,7 +25,7 @@ data class Comment(
     val id: Int? = null,
 
     @Column(name = "Text", nullable = false)
-    var text: String? = null,
+    var text: String,
 
     @Column(name = "Date", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
