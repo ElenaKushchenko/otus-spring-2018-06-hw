@@ -37,13 +37,13 @@
 //    private lateinit var service: GenreService
 //
 //    @Test
-//    fun getShortBooks() {
+//    fun getAllShortBooks() {
 //        val genres = listOf(
 //            Genre(1, "Genre1"),
 //            Genre(2, "Genre2")
 //        )
 //
-//        whenever(service.getShortBooks()).thenReturn(genres)
+//        whenever(service.getAllShortBooks()).thenReturn(genres)
 //
 //        mockMvc.perform(get(BASE_URL))
 //            .andExpect(status().isOk)
@@ -51,7 +51,7 @@
 //            .andExpect(content().json(genres.asJsonString()))
 //            .andReturn().response
 //
-//        verify(service).getShortBooks()
+//        verify(service).getAllShortBooks()
 //        verifyNoMoreInteractions(service)
 //    }
 //

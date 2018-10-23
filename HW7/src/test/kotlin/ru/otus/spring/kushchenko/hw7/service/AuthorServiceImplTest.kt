@@ -21,7 +21,7 @@
 //    private val service = AuthorServiceImpl(repository)
 //
 //    @Test
-//    fun getShortBooks() {
+//    fun getAllShortBooks() {
 //        val authors = listOf(
 //            Author(1, "Author1"),
 //            Author(2, "Author2")
@@ -29,7 +29,7 @@
 //
 //        whenever(repository.findAll()).thenReturn(authors)
 //
-//        assertEquals(authors, service.getShortBooks())
+//        assertEquals(authors, service.getAllShortBooks())
 //
 //        verify(repository).findAll()
 //        verifyNoMoreInteractions(repository)

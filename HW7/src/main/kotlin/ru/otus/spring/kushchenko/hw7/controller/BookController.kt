@@ -23,7 +23,7 @@ class BookController(private val service: BookService) {
 
     @GetMapping("/all")
     fun getAll(): List<ShortBook> =
-        service.getShortBooks()
+        service.getAllShortBooks()
 
     @GetMapping
     fun find(
@@ -32,7 +32,7 @@ class BookController(private val service: BookService) {
         @RequestParam(value = "genreId", required = false) genreId: Int?,
         @RequestParam(value = "page", required = false, defaultValue = "1") page: Int,
         @RequestParam(value = "size", required = false, defaultValue = "20") size: Int
-    ): Page<ShortBook> =
+    ): Page<ShortBook>? =
         service.find(name, authorId, genreId, page, size)
 
     @GetMapping("/{id}")

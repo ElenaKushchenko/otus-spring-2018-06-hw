@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDateTime
 import javax.persistence.CascadeType.REFRESH
 import javax.persistence.Column
+import javax.persistence.Embeddable
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -30,7 +31,7 @@ data class Comment(
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     val date: LocalDateTime? = LocalDateTime.now(),
 
-    @ManyToOne(cascade = [REFRESH])
+    @ManyToOne(cascade = [REFRESH], optional = false)
     @JoinColumn(name = "UserId", nullable = false)
-    val user: User? = null
+    val user: User
 )

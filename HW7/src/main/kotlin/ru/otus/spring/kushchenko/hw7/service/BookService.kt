@@ -9,7 +9,7 @@ import ru.otus.spring.kushchenko.hw7.model.ShortBook
  */
 interface BookService {
     fun getAll(): List<Book>
-    fun getShortBooks(): List<ShortBook>
+    fun getAllShortBooks(): List<ShortBook>
     fun find(name: String?, authorId: Int?, genreId: Int?, page: Int, size: Int): Page<ShortBook>
     fun get(id: Int): Book
     fun create(book: Book): Book

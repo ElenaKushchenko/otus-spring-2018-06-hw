@@ -1,8 +1,9 @@
 package ru.otus.spring.kushchenko.hw7.model
 
+import javax.persistence.CascadeType.ALL
 import javax.persistence.CascadeType.REFRESH
-import javax.persistence.CascadeType.REMOVE
 import javax.persistence.Column
+import javax.persistence.Embedded
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
@@ -34,7 +35,7 @@ data class Book(
     @Column(name = "Paperback")
     var paperback: Int? = null,
 
-    @ManyToMany(cascade = [REFRESH])
+    @ManyToMany(cascade = [REFRESH], fetch = FetchType.EAGER)
     @JoinTable(
         name = "BookAuthor",
         schema = "otus_spring",
@@ -52,7 +53,7 @@ data class Book(
     )
     var genres: List<Genre>? = emptyList(),
 
-    @OneToMany(cascade = [REMOVE])
-    @JoinColumn(name = "BookId", insertable = false)
+    @OneToMany(cascade = [ALL])
+    @JoinColumn(name = "BookId")
     var comments: List<Comment>? = emptyList()
 )

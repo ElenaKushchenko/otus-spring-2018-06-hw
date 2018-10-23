@@ -39,7 +39,7 @@
 //    private lateinit var service: CommentService
 //
 //    @Test
-//    fun getShortBooks() {
+//    fun getAllShortBooks() {
 //        val user1 = User(1, "User1")
 //        val user2 = User(2, "User2")
 //
@@ -48,7 +48,7 @@
 //            Comment(2, "Comment2", LocalDateTime.now(), user2, 2)
 //        )
 //
-//        whenever(service.getShortBooks()).thenReturn(comments)
+//        whenever(service.getAllShortBooks()).thenReturn(comments)
 //
 //        mockMvc.perform(get(BASE_URL))
 //            .andExpect(status().isOk)
@@ -56,7 +56,7 @@
 //            .andExpect(content().json(comments.asJsonString()))
 //            .andReturn().response
 //
-//        verify(service).getShortBooks()
+//        verify(service).getAllShortBooks()
 //        verifyNoMoreInteractions(service)
 //    }
 //
