@@ -19,5 +19,5 @@ data class Author(
     val id: Int? = null,
 
     @Column(name = "Name", nullable = false)
-    var name: String? = null
+    val name: String? = null
 )

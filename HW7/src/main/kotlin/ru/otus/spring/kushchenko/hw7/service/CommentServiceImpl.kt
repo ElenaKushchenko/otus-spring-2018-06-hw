@@ -9,7 +9,7 @@ import ru.otus.spring.kushchenko.hw7.repository.CommentRepository
  * Created by Елена on Июль, 2018
  */
 @Service
-@Transactional
+//@Transactional
 class CommentServiceImpl(private val commentRepository: CommentRepository) : CommentService {
     override fun getAll(): List<Comment> = commentRepository.findAll()
 

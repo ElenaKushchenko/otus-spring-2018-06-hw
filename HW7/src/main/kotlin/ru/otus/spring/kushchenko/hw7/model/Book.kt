@@ -24,16 +24,16 @@ data class Book(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false, insertable = false, updatable = false)
-    val id: Int? = null,
+    private val id: Int? = null,
 
     @Column(name = "Name", nullable = false)
-    var name: String,
+    private val name: String,
 
     @Column(name = "OriginalName")
-    var originalName: String? = null,
+    val originalName: String? = null,
 
     @Column(name = "Paperback")
-    var paperback: Int? = null,
+    val paperback: Int? = null,
 
     @ManyToMany(cascade = [REFRESH])
     @JoinTable(
@@ -42,7 +42,7 @@ data class Book(
         joinColumns = [JoinColumn(name = "BookId")],
         inverseJoinColumns = [JoinColumn(name = "AuthorId")]
     )
-    var authors: List<Author>? = emptyList(),
+    private val authors: List<Author>? = emptyList(),
 
     @ManyToMany(cascade = [REFRESH])
     @JoinTable(
@@ -51,9 +51,14 @@ data class Book(
         joinColumns = [JoinColumn(name = "BookId")],
         inverseJoinColumns = [JoinColumn(name = "GenreId")]
     )
-    var genres: List<Genre>? = emptyList(),
+    private val genres: List<Genre>? = emptyList(),
 
     @OneToMany(cascade = [ALL])
     @JoinColumn(name = "BookId")
-    var comments: List<Comment>? = emptyList()
-)
+    val comments: List<Comment>? = emptyList()
+): ShortBook {
+    override fun getId() = id
+    override fun getName() = name
+    override fun getAuthors() = authors
+    override fun getGenres() = genres
+}

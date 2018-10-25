@@ -9,7 +9,7 @@ import ru.otus.spring.kushchenko.hw7.repository.UserRepository
  * Created by Елена on Июль, 2018
  */
 @Service
-@Transactional
+//@Transactional
 class UserServiceImpl(private val userRepository: UserRepository) : UserService {
     override fun getAll(): List<User> = userRepository.findAll()
 

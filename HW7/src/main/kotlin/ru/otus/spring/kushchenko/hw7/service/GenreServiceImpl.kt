@@ -9,7 +9,7 @@ import ru.otus.spring.kushchenko.hw7.repository.GenreRepository
  * Created by Елена on Июль, 2018
  */
 @Service
-@Transactional
+//@Transactional
 class GenreServiceImpl(private val genreRepository: GenreRepository) : GenreService {
     override fun getAll(): List<Genre> = genreRepository.findAll()
 

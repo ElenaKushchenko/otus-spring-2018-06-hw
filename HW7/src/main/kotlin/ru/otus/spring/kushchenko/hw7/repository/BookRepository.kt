@@ -12,15 +12,15 @@ import ru.otus.spring.kushchenko.hw7.model.ShortBook
  * Created by Елена on Июль, 2018
  */
 interface BookRepository : JpaRepository<Book, Int> {
-    @Query("select b from Book b")
+    @Query("SELECT b FROM Book b")
     fun findAllShortBooks(): List<ShortBook>
 
     @Query(
         """
         SELECT b
         FROM Book b
-          JOIN Author a
-          JOIN Genre g 
+          LEFT JOIN b.authors a
+          LEFT JOIN b.genres g
         WHERE (:name IS NULL OR b.name = :name)
           AND (:authorId IS NULL OR a.id = :authorId)
           AND (:genreId IS NULL OR g.id = :genreId)
@@ -33,10 +33,10 @@ interface BookRepository : JpaRepository<Book, Int> {
         pageable: Pageable
     ): Page<ShortBook>
 
-    fun findByNameAndAuthors_IdAndGenres_Id(
-        name: String?,
-        authorId: Int?,
-        genreId: Int?,
-        pageable: Pageable
-    ): Page<ShortBook>
+//    fun findByNameAndAuthors_IdAndGenres_Id(
+//        name: String?,
+//        authorId: Int?,
+//        genreId: Int?,
+//        pageable: Pageable
+//    ): Page<ShortBook>
 }

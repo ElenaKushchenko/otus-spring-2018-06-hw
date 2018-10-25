@@ -9,7 +9,7 @@ import ru.otus.spring.kushchenko.hw7.repository.AuthorRepository
  * Created by Елена on Июль, 2018
  */
 @Service
-@Transactional
+//@Transactional
 class AuthorServiceImpl(private val authorRepository: AuthorRepository) : AuthorService {
     override fun getAll(): List<Author> = authorRepository.findAll()
 
