@@ -3,9 +3,7 @@ package ru.otus.spring.kushchenko.hw7.model
 import javax.persistence.CascadeType.ALL
 import javax.persistence.CascadeType.REFRESH
 import javax.persistence.Column
-import javax.persistence.Embedded
 import javax.persistence.Entity
-import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
@@ -24,10 +22,10 @@ data class Book(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false, insertable = false, updatable = false)
-    private val id: Int? = null,
+    val id: Int? = null,
 
     @Column(name = "Name", nullable = false)
-    private val name: String,
+    val name: String,
 
     @Column(name = "OriginalName")
     val originalName: String? = null,
@@ -42,7 +40,7 @@ data class Book(
         joinColumns = [JoinColumn(name = "BookId")],
         inverseJoinColumns = [JoinColumn(name = "AuthorId")]
     )
-    private val authors: List<Author>? = emptyList(),
+    val authors: List<Author>? = emptyList(),
 
     @ManyToMany(cascade = [REFRESH])
     @JoinTable(
@@ -51,14 +49,9 @@ data class Book(
         joinColumns = [JoinColumn(name = "BookId")],
         inverseJoinColumns = [JoinColumn(name = "GenreId")]
     )
-    private val genres: List<Genre>? = emptyList(),
+    val genres: List<Genre>? = emptyList(),
 
     @OneToMany(cascade = [ALL])
     @JoinColumn(name = "BookId")
     val comments: List<Comment>? = emptyList()
-): ShortBook {
-    override fun getId() = id
-    override fun getName() = name
-    override fun getAuthors() = authors
-    override fun getGenres() = genres
-}
+)

@@ -28,6 +28,7 @@ import ru.otus.spring.kushchenko.hw7.model.ShortBook
 import ru.otus.spring.kushchenko.hw7.model.User
 import ru.otus.spring.kushchenko.hw7.service.BookService
 import ru.otus.spring.kushchenko.hw7.util.Util.asJsonString
+import ru.otus.spring.kushchenko.hw7.util.Util.toShortBook
 import java.time.LocalDateTime
 
 /**
@@ -58,13 +59,13 @@ class BookControllerTest {
                 name = "Book1",
                 authors = listOf(author1, author2),
                 genres = listOf(genre1, genre2)
-            ),
+            ).toShortBook(),
             Book(
                 id = 2,
                 name = "Book2",
                 authors = listOf(author2, author3),
                 genres = listOf(genre2, genre3)
-            )
+            ).toShortBook()
         )
 
         whenever(service.getAllShortBooks()).thenReturn(books)
@@ -94,13 +95,13 @@ class BookControllerTest {
                 name = "Book1",
                 authors = listOf(author1, author2),
                 genres = listOf(genre1, genre2)
-            ),
+            ).toShortBook(),
             Book(
                 id = 2,
                 name = "Book1",
                 authors = listOf(author1, author3),
                 genres = listOf(genre1, genre3)
-            )
+            ).toShortBook()
         )
 
         val bookNameFilter = "Book1"

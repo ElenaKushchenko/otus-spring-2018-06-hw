@@ -14,8 +14,8 @@ import ru.otus.spring.kushchenko.hw7.model.Author
 import ru.otus.spring.kushchenko.hw7.model.Book
 import ru.otus.spring.kushchenko.hw7.model.Genre
 import ru.otus.spring.kushchenko.hw7.model.ShortBook
-import ru.otus.spring.kushchenko.hw7.model.User
 import ru.otus.spring.kushchenko.hw7.repository.BookRepository
+import ru.otus.spring.kushchenko.hw7.util.Util.toShortBook
 import java.lang.IllegalArgumentException
 import java.util.*
 
@@ -36,8 +36,8 @@ internal class BookServiceImplTest {
         val genre3 = Genre(3, "Genre3")
 
         val books = listOf(
-            Book(id = 1, name = "Book1", authors = listOf(author1, author2), genres = listOf(genre1, genre2)),
-            Book(id = 2, name = "Book2", authors = listOf(author2, author3), genres = listOf(genre2, genre3))
+            Book(id = 1, name = "Book1", authors = listOf(author1, author2), genres = listOf(genre1, genre2)).toShortBook(),
+            Book(id = 2, name = "Book2", authors = listOf(author2, author3), genres = listOf(genre2, genre3)).toShortBook()
         )
 
         whenever(repository.findAllShortBooks()).thenReturn(books)
@@ -58,8 +58,8 @@ internal class BookServiceImplTest {
         val genre3 = Genre(3, "Genre3")
 
         val books: List<ShortBook> = listOf(
-            Book(id = 1, name = "Book1", authors = listOf(author1, author2), genres = listOf(genre1, genre2)),
-            Book(id = 2, name = "Book2", authors = listOf(author2, author3), genres = listOf(genre2, genre3))
+            Book(id = 1, name = "Book1", authors = listOf(author1, author2), genres = listOf(genre1, genre2)).toShortBook(),
+            Book(id = 2, name = "Book2", authors = listOf(author2, author3), genres = listOf(genre2, genre3)).toShortBook()
         )
 
         val bookNameFilter = "Book1"

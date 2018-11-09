@@ -33,7 +33,7 @@ interface BookRepository : JpaRepository<Book, Int> {
         pageable: Pageable
     ): Page<ShortBook>
 
-//    fun findByNameAndAuthors_IdAndGenres_Id(
+//    fun findByNameAndAuthorsIdAndGenresId(
 //        name: String?,
 //        authorId: Int?,
 //        genreId: Int?,

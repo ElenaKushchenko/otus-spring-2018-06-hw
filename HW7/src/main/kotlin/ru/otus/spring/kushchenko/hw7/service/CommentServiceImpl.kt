@@ -1,7 +1,6 @@
 package ru.otus.spring.kushchenko.hw7.service
 
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import ru.otus.spring.kushchenko.hw7.model.Comment
 import ru.otus.spring.kushchenko.hw7.repository.CommentRepository
 
@@ -9,7 +8,6 @@ import ru.otus.spring.kushchenko.hw7.repository.CommentRepository
  * Created by Елена on Июль, 2018
  */
 @Service
-//@Transactional
 class CommentServiceImpl(private val commentRepository: CommentRepository) : CommentService {
     override fun getAll(): List<Comment> = commentRepository.findAll()
 
