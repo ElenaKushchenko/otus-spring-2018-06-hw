@@ -1,0 +1,34 @@
+logging:
+  level:
+    ru.otus.spring.kushchenko: INFO
+    org.springframework: WARN
+  file: logs/app.log
+  pattern.file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n'
+
+server:
+  port: 8877
+  servlet:
+    context-path: /library
+
+spring:
+  datasource:
+    platform: postgresql
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://ec2-46-137-97-169.eu-west-1.compute.amazonaws.com:5432/dasfn4ilo4198n?ssl=true&sslmode=require
+    username: ojqauvtsoaxnme
+    password: 23094854350b2ef8616c795ba23a9e73c877dc7513065206293cd661effb994b
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate.temp.use_jdbc_metadata_defaults: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+#    show-sql: true
+#    properties.hibernate.format_sql: true
+
+  thymeleaf:
+    prefix: classpath:/static/
+    cache: false
