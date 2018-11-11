@@ -1,8 +1,8 @@
 package ru.otus.spring.kushchenko.hw9.model
 
-interface ShortBook {
-    fun getId(): Int?
-    fun getName(): String
-    fun getAuthors(): List<Author>?
-    fun getGenres(): List<Genre>?
-}
+data class ShortBook(
+    val id: String,
+    val name: String,
+    val authors: List<String>? = emptyList(),
+    val genres: List<String>? = emptyList()
+)

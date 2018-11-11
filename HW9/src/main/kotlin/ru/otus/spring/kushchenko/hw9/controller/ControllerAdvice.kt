@@ -18,9 +18,9 @@ class ControllerAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     private fun generalError(ex: Exception) =
-        ModelAndView().also {
-            it.addObject("message", if (ex.message.isNullOrBlank()) "Unknown Error" else ex.message)
-            it.addObject("type", ex.javaClass.simpleName)
-            it.viewName = "error"
+        ModelAndView().apply {
+            addObject("message", if (ex.message.isNullOrBlank()) "Unknown Error" else ex.message)
+            addObject("type", ex.javaClass.simpleName)
+            viewName = "error"
         }
 }

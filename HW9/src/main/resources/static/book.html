@@ -20,29 +20,25 @@
         </div>
         <div class="row">
             <div class="col-sm">Authors</div>
-            <div class="col-sm" th:each="author : ${book.authors}">
-                <a th:text="${author.name}"></a>
-            </div>
+            <div class="col-sm" th:text="${#strings.listJoin(book.authors, ', ')}"></div>
         </div>
         <div class="row">
             <div class="col-sm">Genres</div>
-            <div class="col-sm" th:each="genre : ${book.genres}">
-                <a th:text="${genre.name}"></a>
-            </div>
+            <div class="col-sm" th:text="${#strings.listJoin(book.genres, ', ')}"></div>
         </div>
     </div>
     <div style="margin: 20px 0">
         <div class="card" th:each="comment : ${book.comments}">
             <div class="card-body">
-                <h5 class="card-title" th:text="${comment.user.name}"></h5>
+                <h5 class="card-title" th:text="${comment.username}"></h5>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="${#temporals.format(comment.date,'dd-MM-yyyy HH:mm')}"></h6>
                 <p class="card-text" th:text="${comment.text}"></p>
             </div>
         </div>
     </div>
-    <form th:action="@{/books/{bookId}/addComment(bookId=${book.id})}" th:object="${comment}" method="post">
+    <form th:action="@{/books/{bookId}/comments(bookId=${book.id})}" method="post" th:object="${comment}">
         <div class="form-group">
-            <label for="userName">Name</label>
+            <label for="userName">Username</label>
             <input class="form-control" id="userName" aria-describedby="userNameHelp" placeholder="Enter your name">
             <small id="userNameHelp" class="form-text text-muted">Please introduce yourself</small>
         </div>

@@ -23,12 +23,8 @@
                     <td>
                         <a class="link" th:href="@{/books/{id}(id=${book.id})}" href="book.html" th:text="${book.name}"></a>
                     </td>
-                    <td>
-                        <a th:each="author : ${book.authors}" th:text="${author.name}"></a>
-                    </td>
-                    <td>
-                        <a th:each="genre : ${book.genres}" th:text="${genre.name}"></a>
-                    </td>
+                    <td th:text="${#strings.listJoin(book.authors, ', ')}"></td>
+                    <td th:text="${#strings.listJoin(book.genres, ', ')}"></td>
                     <td style="border: none">
                         <a th:href="@{/books/{id}/delete(id=${book.id})}"><i class="fas fa-trash-alt"></i></a>
                     </td>
@@ -48,26 +44,36 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form id="save-book-form" th:action="@{/books/save}" action="#" method="post">
-                        <div>
-                            <label for="name-input">Name</label>
-                            <input id="name-input" name="name"/>
+                <form id="save-book-form" th:action="@{/books}" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nameInput">Name</label>
+                            <input class="form-control" id="nameInput" name="name" required/>
                         </div>
-                        <div>
-                            <label for="authors-input">Authors</label>
-                            <input id="authors-input" name="authors"/>
+                        <div class="form-group">
+                            <label for="originalNameInput">Original name</label>
+                            <input class="form-control" id="originalNameInput" name="originalName"/>
                         </div>
-                        <div>
-                            <label for="genre-input">Genres</label>
-                            <input id="genre-input" name="genres"/>
+                        <div class="form-group">
+                            <label for="paperbackInput">Paperback</label>
+                            <input type="number" min="1" step="1" pattern="\d*" class="form-control" id="paperbackInput" name="paperback"/>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
+                        <div class="form-group">
+                            <label for="authorsInput">Authors</label>
+                            <input class="form-control" id="authorsInput" aria-describedby="authorsHelp" name="authors"/>
+                            <small id="authorsHelp" class="form-text text-muted">Please enter authors separated by comma</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="genreInput">Genres</label>
+                            <input class="form-control" id="genreInput" aria-describedby="genresHelp" name="genres"/>
+                            <small id="genresHelp" class="form-text text-muted">Please enter genres separated by comma</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

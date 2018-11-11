@@ -2,6 +2,7 @@ package ru.otus.spring.kushchenko.hw9.service
 
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.otus.spring.kushchenko.hw9.model.Book
 import ru.otus.spring.kushchenko.hw9.model.ShortBook
@@ -12,23 +13,29 @@ import ru.otus.spring.kushchenko.hw9.repository.BookRepository
  */
 @Service
 class BookServiceImpl(private val bookRepository: BookRepository) : BookService {
-    override fun getAllShortBooks(): List<ShortBook> = bookRepository.findAllShortBooks()
+    override fun getAll(): List<ShortBook> = bookRepository.findAllShortBooks()
 
-    override fun find(name: String?, authorId: Int?, genreId: Int?, page: Int, size: Int): Page<ShortBook> {
-        val pageable = PageRequest.of(page - 1, size)
-
-        return bookRepository.find(
-            name,
-            authorId,
-            genreId,
-            pageable
+    override fun getPaged(page: Int, size: Int, sortBy: String, dir: String): Page<Book> {
+        val pageable = PageRequest.of(
+            page - 1,
+            size,
+            Sort(Sort.Direction.valueOf(dir), sortBy)
         )
+
+        return bookRepository.findAll(pageable)
     }
 
-    override fun get(id: Int): Book = bookRepository.findById(id)
+    override fun get(id: String): Book = bookRepository.findById(id)
         .orElseThrow { IllegalArgumentException("Book with id = $id not found") }
 
-    override fun create(book: Book): Book = bookRepository.save(book)
+    override fun create(book: Book): Book {
+        book.id?.let {
+            if (bookRepository.existsById(it))
+                throw IllegalArgumentException("Book with id = $it already exists")
+        }
+
+        return bookRepository.save(book)
+    }
 
     override fun update(book: Book): Book {
         val id = book.id!!
@@ -39,5 +46,5 @@ class BookServiceImpl(private val bookRepository: BookRepository) : BookService 
         return bookRepository.save(book)
     }
 
-    override fun delete(id: Int) = bookRepository.deleteById(id)
+    override fun delete(id: String) = bookRepository.deleteById(id)
 }

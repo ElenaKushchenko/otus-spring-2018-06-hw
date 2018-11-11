@@ -2,28 +2,29 @@ package ru.otus.spring.kushchenko.hw9.service
 
 import org.springframework.stereotype.Service
 import ru.otus.spring.kushchenko.hw9.model.Comment
-import ru.otus.spring.kushchenko.hw9.repository.CommentRepository
+import ru.otus.spring.kushchenko.hw9.repository.BookRepository
 
-/**
- * Created by Елена on Июль, 2018
- */
 @Service
-class CommentServiceImpl(private val commentRepository: CommentRepository) : CommentService {
-    override fun getAll(): List<Comment> = commentRepository.findAll()
+class CommentServiceImpl(private val bookRepository: BookRepository) : CommentService {
 
-    override fun get(id: Int): Comment = commentRepository.findById(id)
-        .orElseThrow { IllegalArgumentException("Comment with id = $id not found") }
+    override fun create(bookId: String, comment: Comment): Comment {
+        val book = bookRepository.findById(bookId)
+            .orElseThrow { IllegalArgumentException("Book with id = $bookId not found") }
+        val updatedBook = book.copy(comments = (book.comments ?: emptyList()).plus(comment))
 
-    override fun create(comment: Comment) = commentRepository.save(comment)
-
-    override fun update(comment: Comment): Comment {
-        val id = comment.id!!
-
-        if (commentRepository.existsById(id).not())
-            throw IllegalArgumentException("Comment with id = $id not found")
-
-        return commentRepository.save(comment)
+        bookRepository.save(updatedBook)
+        return comment
     }
 
-    override fun delete(id: Int) = commentRepository.deleteById(id)
+    override fun delete(bookId: String, comment: Comment) {
+        val book = bookRepository.findById(bookId)
+            .orElseThrow { IllegalArgumentException("Book with id = $bookId not found") }
+
+        book.comments?.let {
+            if (book.comments.contains(comment)) {
+                val updatedBook = book.copy(comments = book.comments.minus(comment))
+                bookRepository.save(updatedBook)
+            }
+        }
+    }
 }

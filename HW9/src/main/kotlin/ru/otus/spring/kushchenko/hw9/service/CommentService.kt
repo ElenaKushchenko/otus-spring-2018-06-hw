@@ -6,9 +6,6 @@ import ru.otus.spring.kushchenko.hw9.model.Comment
  * Created by Елена on Июль, 2018
  */
 interface CommentService {
-    fun getAll(): List<Comment>
-    fun get(id: Int): Comment
-    fun create(comment: Comment): Comment
-    fun update(comment: Comment): Comment
-    fun delete(id: Int)
+    fun create(bookId: String, comment: Comment): Comment
+    fun delete(bookId: String, comment: Comment)
 }

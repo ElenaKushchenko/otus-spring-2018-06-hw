@@ -11,17 +11,9 @@
 
     <div class="container">
         <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr th:each="author : ${authors}">
-                    <td th:text="${author.name}"></td>
-                    <td style="border: none">
-                        <a th:href="@{/authors/{id}/delete(id=${author.id})}" href="authors.html"><i class="fas fa-trash-alt"></i></a>
-                    </td>
+                    <td th:text="${author}"></td>
                 </tr>
             </tbody>
         </table>

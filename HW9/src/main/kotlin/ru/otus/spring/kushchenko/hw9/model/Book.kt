@@ -1,57 +1,19 @@
 package ru.otus.spring.kushchenko.hw9.model
 
-import javax.persistence.CascadeType.ALL
-import javax.persistence.CascadeType.REFRESH
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.JoinTable
-import javax.persistence.ManyToMany
-import javax.persistence.OneToMany
-import javax.persistence.Table
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
 /**
  * Created by Елена on Июль, 2018
  */
-@Entity
-@Table(name = "Book", schema = "otus_spring_hw9")
+@Document(collection = "books")
 data class Book(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false, insertable = false, updatable = false)
-    val id: Int? = null,
-
-    @Column(name = "Name", nullable = false)
+    val id: String? = null,
     val name: String,
-
-    @Column(name = "OriginalName")
     val originalName: String? = null,
-
-    @Column(name = "Paperback")
     val paperback: Int? = null,
-
-    @ManyToMany(cascade = [REFRESH])
-    @JoinTable(
-        name = "BookAuthor",
-        schema = "otus_spring_hw9",
-        joinColumns = [JoinColumn(name = "BookId")],
-        inverseJoinColumns = [JoinColumn(name = "AuthorId")]
-    )
-    val authors: List<Author>? = emptyList(),
-
-    @ManyToMany(cascade = [REFRESH])
-    @JoinTable(
-        name = "BookGenre",
-        schema = "otus_spring_hw9",
-        joinColumns = [JoinColumn(name = "BookId")],
-        inverseJoinColumns = [JoinColumn(name = "GenreId")]
-    )
-    val genres: List<Genre>? = emptyList(),
-
-    @OneToMany(cascade = [ALL])
-    @JoinColumn(name = "BookId")
+    val authors: List<String>? = emptyList(),
+    val genres: List<String>? = emptyList(),
     val comments: List<Comment>? = emptyList()
 )
