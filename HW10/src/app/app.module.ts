@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 
@@ -11,6 +12,7 @@ import {BookDetailsComponent} from "./components/book-details/book-details.compo
 import {AuthorListComponent} from "./components/author-list/author-list.component";
 import {GenreListComponent} from "./components/genre-list/genre-list.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
+import {GenreService} from "./service/genre.service";
 
 @NgModule({
   declarations: [
@@ -25,9 +27,12 @@ import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     CollapseModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    GenreService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

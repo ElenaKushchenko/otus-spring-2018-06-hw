@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {GenreService} from "../../service/genre.service";
 
 @Component({
   selector: 'genre-list',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./genre-list.component.scss']
 })
 export class GenreListComponent {
+
+  constructor(private genreService: GenreService) {
+  }
 }
