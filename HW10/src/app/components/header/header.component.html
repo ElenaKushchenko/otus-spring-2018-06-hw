@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <img src="../../../assets/Vector_Book_blue.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    MyLibrary
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+          (click)="isCollapsed = !isCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [collapse]="isCollapsed">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Books</a>
+      <a class="nav-item nav-link" href="#">Authors</a>
+      <a class="nav-item nav-link" href="#">Genres</a>
+    </div>
+  </div>
+</nav>
