@@ -15,16 +15,4 @@ class CommentServiceImpl(private val bookRepository: BookRepository) : CommentSe
         bookRepository.save(updatedBook)
         return comment
     }
-
-    override fun delete(bookId: String, comment: Comment) {
-        val book = bookRepository.findById(bookId)
-            .orElseThrow { IllegalArgumentException("Book with id = $bookId not found") }
-
-        book.comments?.let {
-            if (book.comments.contains(comment)) {
-                val updatedBook = book.copy(comments = book.comments.minus(comment))
-                bookRepository.save(updatedBook)
-            }
-        }
-    }
 }

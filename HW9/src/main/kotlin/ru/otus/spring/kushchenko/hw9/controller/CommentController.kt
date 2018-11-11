@@ -16,7 +16,8 @@ import ru.otus.spring.kushchenko.hw9.service.CommentService
  */
 @Controller
 @RequestMapping("/books/{bookId}/comments")
-class CommentController(private val service: CommentService) {
+class CommentController(private val bookController: BookController,
+                        private val service: CommentService) {
 
     @PostMapping
     fun create(
@@ -25,16 +26,6 @@ class CommentController(private val service: CommentService) {
         model: Model
     ): String {
         service.create(bookId, comment)
-        return "book"
-    }
-
-    @DeleteMapping
-    fun delete(
-        @PathVariable("bookId") bookId: String,
-        comment: Comment,
-        model: Model
-    ): String {
-        service.delete(bookId, comment)
-        return "book"
+        return bookController.get(bookId, model)
     }
 }

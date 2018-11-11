@@ -1,6 +1,5 @@
 package ru.otus.spring.kushchenko.hw9.model
 
-import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDateTime
 
 /**
@@ -8,7 +7,6 @@ import java.time.LocalDateTime
  */
 data class Comment(
     val text: String,
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     val date: LocalDateTime? = LocalDateTime.now(),
     var username: String
 )

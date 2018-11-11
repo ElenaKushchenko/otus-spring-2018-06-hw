@@ -7,5 +7,4 @@ import ru.otus.spring.kushchenko.hw9.model.Comment
  */
 interface CommentService {
     fun create(bookId: String, comment: Comment): Comment
-    fun delete(bookId: String, comment: Comment)
 }

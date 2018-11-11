@@ -28,7 +28,7 @@
         </div>
     </div>
     <div style="margin: 20px 0">
-        <div class="card" th:each="comment : ${book.comments}">
+        <div class="card" style="margin: 10px 0;" th:each="comment : ${book.comments}">
             <div class="card-body">
                 <h5 class="card-title" th:text="${comment.username}"></h5>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="${#temporals.format(comment.date,'dd-MM-yyyy HH:mm')}"></h6>
@@ -36,18 +36,19 @@
             </div>
         </div>
     </div>
-    <form th:action="@{/books/{bookId}/comments(bookId=${book.id})}" method="post" th:object="${comment}">
-        <div class="form-group">
-            <label for="userName">Username</label>
-            <input class="form-control" id="userName" aria-describedby="userNameHelp" placeholder="Enter your name">
-            <small id="userNameHelp" class="form-text text-muted">Please introduce yourself</small>
-        </div>
-        <div class="form-group">
-            <label for="commentText">Comment</label>
-            <input type="password" class="form-control" id="commentText" placeholder="Comment">
-        </div>
-        <button type="submit" class="btn btn-primary">Add comment</button>
-    </form>
+    <div style="margin: 20px 0">
+        <form th:action="@{/books/{bookId}/comments(bookId=${book.id})}" method="post" th:object="${comment}">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input class="form-control" id="username" name="username" aria-describedby="userNameHelp" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <input class="form-control" id="comment" name="text" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add comment</button>
+        </form>
+    </div>
 </div>
 
 <!--Bootstrap-->
