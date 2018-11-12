@@ -2,26 +2,26 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, throwError as observableThrowError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {Genre} from "../model/genre";
+import {User} from "../model/user";
 
 @Injectable()
-export class GenreService {
-  private apiBase = '/api/genres';
+export class UserService {
+  private apiBase = '/api/users';
 
   constructor(private http: HttpClient) {
   }
 
-  getGenres(): Observable<Genre[]> {
+  getUsers(): Observable<User[]> {
     return this.http
-      .get<Genre[]>(this.apiBase)
+      .get<User[]>(this.apiBase)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  getGenre(id: number): Observable<Genre> {
+  getUser(id: number): Observable<User> {
     return this.http
-      .get<Genre>(`${this.apiBase}/${id}`)
+      .get<User>(`${this.apiBase}/${id}`)
       .pipe(
         catchError(this.handleError)
       );
@@ -29,30 +29,30 @@ export class GenreService {
 
   delete(id: number) {
     return this.http
-      .delete<Genre>(`${this.apiBase}/${id}`)
+      .delete<User>(`${this.apiBase}/${id}`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  create(genre: Genre) {
+  create(user: User) {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
 
     return this.http
-      .post<Genre>(this.apiBase, genre)
+      .post<User>(this.apiBase, user)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  update(id: number, genre: Genre) {
+  update(id: number, user: User) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
     return this.http
-      .put<Genre>(`${this.apiBase}/${id}`, genre)
+      .put<User>(`${this.apiBase}/${id}`, user)
       .pipe(
         catchError(this.handleError)
       );

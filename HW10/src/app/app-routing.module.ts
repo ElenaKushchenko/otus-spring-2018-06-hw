@@ -5,6 +5,7 @@ import {BookDetailsComponent} from "./components/book-details/book-details.compo
 import {AuthorListComponent} from "./components/author-list/author-list.component";
 import {GenreListComponent} from "./components/genre-list/genre-list.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
+import {UserListComponent} from "./components/user-list/user-list.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/books', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'books/:id', component: BookDetailsComponent },
   { path: 'authors', component: AuthorListComponent },
   { path: 'genres', component: GenreListComponent },
+  { path: 'users', component: UserListComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

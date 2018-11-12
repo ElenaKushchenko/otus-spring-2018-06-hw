@@ -1,1 +1,22 @@
-author-list
+<div class="container">
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let author of authors">
+      <td>{{author.id}}</td>
+      <td>{{author.name}}</td>
+      <td class="table-controls">
+        <a (click)="openEditorComponent(author)"><i class="fas fa-pen text-info"></i></a>
+        <a (click)="openConfirmationComponent(author.id)"><i class="fas fa-trash text-info"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="button" (click)="openEditorComponent(null)" class="btn btn-info">Add author</button>
+</div>

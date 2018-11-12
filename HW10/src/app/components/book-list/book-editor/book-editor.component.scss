@@ -1,0 +1,20 @@
+.dropdown-group > * {
+  width: 100%;
+
+  .dropdown-btn {
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    border: 1px solid #ced4da;
+    text-align: left;
+  }
+
+  .dropdown-item {
+    &:active, &:hover {
+      background-color: gainsboro;
+    }
+  }
+
+  .item-selected {
+    background-color: darkgrey;
+  }
+}

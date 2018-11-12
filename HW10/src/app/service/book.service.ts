@@ -2,26 +2,27 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, throwError as observableThrowError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {Genre} from "../model/genre";
+import {Book} from "../model/book";
+import {ShortBook} from "../model/short-book";
 
 @Injectable()
-export class GenreService {
-  private apiBase = '/api/genres';
+export class BookService {
+  private apiBase = '/api/books';
 
   constructor(private http: HttpClient) {
   }
 
-  getGenres(): Observable<Genre[]> {
+  getBooks(): Observable<ShortBook[]> {
     return this.http
-      .get<Genre[]>(this.apiBase)
+      .get<Book[]>(`${this.apiBase}/all`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  getGenre(id: number): Observable<Genre> {
+  getBook(id: number): Observable<Book> {
     return this.http
-      .get<Genre>(`${this.apiBase}/${id}`)
+      .get<Book>(`${this.apiBase}/${id}`)
       .pipe(
         catchError(this.handleError)
       );
@@ -29,30 +30,30 @@ export class GenreService {
 
   delete(id: number) {
     return this.http
-      .delete<Genre>(`${this.apiBase}/${id}`)
+      .delete<Book>(`${this.apiBase}/${id}`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  create(genre: Genre) {
+  create(book: Book) {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
 
     return this.http
-      .post<Genre>(this.apiBase, genre)
+      .post<Book>(this.apiBase, book)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  update(id: number, genre: Genre) {
+  update(id: number, book: Book) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
     return this.http
-      .put<Genre>(`${this.apiBase}/${id}`, genre)
+      .put<Book>(`${this.apiBase}/${id}`, book)
       .pipe(
         catchError(this.handleError)
       );

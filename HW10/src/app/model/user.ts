@@ -1,4 +1,4 @@
-export class Genre {
+export class User {
   constructor(public name: string,
               public id?: number) {
   }
