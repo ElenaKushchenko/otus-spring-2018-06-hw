@@ -12,7 +12,7 @@
     <tbody>
     <tr *ngFor="let book of books">
       <td>{{book.id}}</td>
-      <td>{{book.name}}</td>
+      <td><a [routerLink]="['/books', book.id]">{{book.name}}</a></td>
       <td>{{joinToString(book.authors)}}</td>
       <td>{{joinToString(book.genres)}}</td>
       <td class="table-controls">

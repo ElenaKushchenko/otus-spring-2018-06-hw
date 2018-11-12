@@ -39,7 +39,7 @@ export class BookEditorComponent {
   selectGenre(genre: Genre) {
     if (this.book.genres == null) this.book.genres = [];
 
-    if (this.book.genres.includes(genre)) {
+    if (this.book.genres.findIndex(it => it.id == genre.id) != -1) {
       this.book.genres = this.book.genres.filter(it => it != genre)
     } else {
       this.book.genres.push(genre)
@@ -49,7 +49,7 @@ export class BookEditorComponent {
   selectAuthor(author: Author) {
     if (this.book.authors == null) this.book.authors = [];
 
-    if (this.book.authors.includes(author)) {
+    if (this.book.authors.findIndex(it => it.id == author.id) != -1) {
       this.book.authors = this.book.authors.filter(it => it != author)
     } else {
       this.book.authors.push(author)
@@ -57,10 +57,10 @@ export class BookEditorComponent {
   }
 
   isAuthorSelected(author: Author) {
-    if (this.book.authors) return this.book.authors.includes(author)
+    if (this.book.authors) return this.book.authors.findIndex(it => it.id == author.id) != -1
   }
 
   isGenreSelected(genre: Genre) {
-    if (this.book.genres) return this.book.authors.includes(genre)
+    if (this.book.genres) return this.book.genres.findIndex(it => it.id == genre.id) != -1
   }
 }

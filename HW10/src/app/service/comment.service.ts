@@ -35,7 +35,7 @@ export class CommentService {
       );
   }
 
-  post(comment: Comment) {
+  create(comment: Comment) {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
@@ -47,7 +47,7 @@ export class CommentService {
       );
   }
 
-  put(id: number, comment: Comment) {
+  update(id: number, comment: Comment) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 

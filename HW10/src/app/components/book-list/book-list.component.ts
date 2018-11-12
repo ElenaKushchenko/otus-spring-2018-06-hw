@@ -37,7 +37,7 @@ export class BookListComponent {
   getBooks() {
     this.bookService.getBooks()
       .subscribe(data =>
-        this.books = data,
+        this.books = data
       );
   }
 
