@@ -21,7 +21,7 @@ internal class UserServiceImplTest {
     private val service = UserServiceImpl(repository)
 
     @Test
-    fun getAllShortBooks() {
+    fun getAll() {
         val users = listOf(
             User(1, "Reader1"),
             User(2, "Reader2")

@@ -133,12 +133,12 @@ class BookControllerTest {
 
     @Test
     fun get() {
+        val bookId = 1
         val author = Author(1, "Author1")
         val genre = Genre(1, "Genre1")
         val user = User(1, "User1")
-        val comment = Comment(1, "Text", LocalDateTime.now(), user)
+        val comment = Comment(1, "Text", LocalDateTime.now(), user, bookId)
 
-        val bookId = 1
         val book = Book(
             id = bookId,
             name = "Book1",

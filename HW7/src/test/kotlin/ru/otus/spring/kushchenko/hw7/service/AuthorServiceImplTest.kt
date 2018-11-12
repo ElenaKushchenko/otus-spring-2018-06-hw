@@ -21,7 +21,7 @@ class AuthorServiceImplTest {
     private val service = AuthorServiceImpl(repository)
 
     @Test
-    fun getAllShortBooks() {
+    fun getAll() {
         val authors = listOf(
             Author(1, "Author1"),
             Author(2, "Author2")

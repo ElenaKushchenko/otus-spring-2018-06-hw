@@ -22,7 +22,7 @@ internal class GenreServiceImplTest {
     private val service = GenreServiceImpl(repository)
 
     @Test
-    fun getAllShortBooks() {
+    fun getAll() {
         val genres = listOf(
             Genre(1, "Genre1"),
             Genre(2, "Genre2")

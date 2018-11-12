@@ -33,5 +33,8 @@ data class Comment(
 
     @ManyToOne(cascade = [REFRESH], optional = false)
     @JoinColumn(name = "UserId", nullable = false)
-    val user: User
+    val user: User,
+
+    @Column(name = "BookId", nullable = false)
+    val bookId: Int
 )

@@ -39,12 +39,13 @@ class CommentControllerTest {
 
     @Test
     fun getAll() {
+        val bookId = 1
         val user1 = User(1, "User1")
         val user2 = User(2, "User2")
 
         val comments = listOf(
-            Comment(1, "Comment1", LocalDateTime.now(), user1),
-            Comment(2, "Comment2", LocalDateTime.now(), user2)
+            Comment(1, "Comment1", LocalDateTime.now(), user1, bookId),
+            Comment(2, "Comment2", LocalDateTime.now(), user2, bookId)
         )
 
         whenever(service.getAll()).thenReturn(comments)
@@ -61,10 +62,11 @@ class CommentControllerTest {
 
     @Test
     fun get() {
+        val bookId = 1
         val user = User(1, "User1")
 
         val commentId = 1
-        val comment = Comment(commentId, "Comment1", LocalDateTime.now().withNano(0), user)
+        val comment = Comment(commentId, "Comment1", LocalDateTime.now().withNano(0), user, bookId)
 
         whenever(service.get(commentId)).thenReturn(comment)
 
@@ -80,8 +82,9 @@ class CommentControllerTest {
 
     @Test
     fun create() {
+        val bookId = 1
         val user = User(1, "User1")
-        val comment = Comment(1, "Comment1", LocalDateTime.now().withNano(0), user)
+        val comment = Comment(1, "Comment1", LocalDateTime.now().withNano(0), user, bookId)
 
         whenever(service.create(comment)).thenReturn(comment)
 
@@ -101,10 +104,11 @@ class CommentControllerTest {
 
     @Test
     fun update() {
+        val bookId = 1
         val user = User(1, "User1")
 
         val commentId = 1
-        val comment = Comment(1, "Comment1", LocalDateTime.now().withNano(0), user)
+        val comment = Comment(1, "Comment1", LocalDateTime.now().withNano(0), user, bookId)
 
         whenever(service.update(comment)).thenReturn(comment)
 
