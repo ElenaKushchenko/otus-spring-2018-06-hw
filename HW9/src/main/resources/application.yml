@@ -11,7 +11,7 @@ server:
     context-path: /library
 
 spring:
-  data.mongodb.uri: mongodb+srv://otus-spring:12345@sandbox-cg92x.mongodb.net/library-app?retryWrites=true
+  data.mongodb.uri: mongodb+srv://otus-spring:12345@sandbox-cg92x.mongodb.net/library-hw9?retryWrites=true
 
   thymeleaf:
     prefix: classpath:/static/
