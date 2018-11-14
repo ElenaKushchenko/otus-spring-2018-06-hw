@@ -1,6 +1,5 @@
 package ru.otus.spring.kushchenko.hw11.service
 
-import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
@@ -49,55 +48,44 @@ class CommentServiceImpl(
 
     override fun get(id: String): Mono<Comment> {
         return commentRepository.findById(id)
-            .doOnNext { exists ->
-                exists ?: throw IllegalArgumentException("Comment with id = $id not found")
-            }
+            .switchIfEmpty(Mono.error(IllegalArgumentException("Comment with id = $id not found")))
     }
 
-    override fun create(comment: Comment): Mono<Comment> {
-        comment.id?.let {
-            commentRepository.existsById(it)
-                .doOnNext { exists ->
-                    if (exists)
-                        throw IllegalArgumentException("Comment with id = $it already exists")
-                }
-        }
-        val user = userRepository.findById(comment.user.id!!)
-            .doOnNext { exists ->
-                exists ?: throw IllegalArgumentException("User with id = ${comment.user.id} not found")
+    override fun create(comment: Comment): Mono<Comment> =
+        Mono.just(comment.id != null)
+            .filter { presented -> presented }
+            .flatMap {
+                commentRepository.existsById(comment.id!!)
+                    .filter { exists -> exists }
+                    .flatMap { Mono.error<Comment>(IllegalArgumentException("Comment with id = ${comment.id} already exists")) }
             }
-        val book = bookRepository.findById(comment.book.id!!)
-            .doOnNext { exists ->
-                exists ?: throw IllegalArgumentException("Book with id = ${comment.book.id} not found")
+            .switchIfEmpty(save(comment))
+
+    override fun update(comment: Comment): Mono<Comment> =
+        Mono.just(comment.id != null)
+            .filter { presented -> presented }
+            .flatMap {
+                commentRepository.existsById(comment.id!!)
+                    .filter { exists -> exists.not() }
+                    .flatMap { Mono.error<Comment>(IllegalArgumentException("Comment with id = ${comment.id} not found")) }
             }
-        comment.user = user.block()!!
-        comment.book = book.block()!!
+            .switchIfEmpty(save(comment))
 
-        return commentRepository.save(comment)
-    }
-
-    override fun update(comment: Comment): Mono<Comment> {
-        val id = comment.id!!
-
-        commentRepository.existsById(id)
-            .doOnNext { exists ->
-                if (exists.not())
-                    throw IllegalArgumentException("Comment with id = $id already exists")
+    private fun save(comment: Comment): Mono<Comment> =
+        Mono.just(comment)
+            .flatMap {
+                userRepository.findById(comment.user.id!!)
+                    .map { comment.user = it }
+                    .switchIfEmpty(Mono.error(IllegalArgumentException("User with id = ${comment.user.id} not found")))
             }
-
-        val user = userRepository.findById(comment.user.id!!)
-            .doOnNext { exists ->
-                exists ?: throw IllegalArgumentException("User with id = ${comment.user.id} not found")
+            .flatMap {
+                bookRepository.findById(comment.book.id!!)
+                    .map { comment.book = it }
+                    .switchIfEmpty(Mono.error(IllegalArgumentException("Book with id = ${comment.book.id} not found")))
             }
-        val book = bookRepository.findById(comment.book.id!!)
-            .doOnNext { exists ->
-                exists ?: throw IllegalArgumentException("Book with id = ${comment.book.id} not found")
+            .flatMap {
+                commentRepository.save(comment)
             }
-        comment.user = user.block()!!
-        comment.book = book.block()!!
-
-        return commentRepository.save(comment)
-    }
 
     override fun delete(id: String) = commentRepository.deleteById(id)
 }

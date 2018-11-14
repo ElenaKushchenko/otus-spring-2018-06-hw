@@ -12,8 +12,8 @@ import ru.otus.spring.kushchenko.hw11.repository.BookRepository
  * Created by Елена on Июль, 2018
  */
 @Service
-class BookServiceImpl(private val bookRepository: BookRepository) : BookService {
-    override fun getAll(): Flux<Book> = bookRepository.findAll()
+class BookServiceImpl(private val repository: BookRepository) : BookService {
+    override fun getAll(): Flux<Book> = repository.findAll()
 
     override fun getPaged(page: Int, size: Int, sortBy: String, dir: String): Flux<Book> {
         val pageable = PageRequest.of(
@@ -22,34 +22,29 @@ class BookServiceImpl(private val bookRepository: BookRepository) : BookService 
             Sort(Sort.Direction.valueOf(dir), sortBy)
         )
 
-        return bookRepository.getPaged(pageable)
+        return repository.getPaged(pageable)
     }
 
     override fun get(id: String): Mono<Book> =
-        bookRepository.findById(id)
+        repository.findById(id)
             .switchIfEmpty(Mono.error(IllegalArgumentException("Book with id = $id not found")))
 
-    override fun create(book: Book): Mono<Book> {
-        book.id?.let {
-            bookRepository.existsById(it)
-                .doOnNext {  }
-                .switchIfEmpty(Mono.error(IllegalArgumentException("Book with id = $it not found")))
-        }
+    override fun create(book: Book): Mono<Book> =
+        Mono.just(book.id != null)
+            .filter { presented -> presented }
+            .flatMap {
+                repository.existsById(book.id!!)
+                    .filter { exists -> exists }
+                    .flatMap { Mono.error<Book>(IllegalArgumentException("Book with id = ${book.id} already exists")) }
+            }
+            .switchIfEmpty(repository.save(book))
 
-        return bookRepository.save(book)
-    }
-
-    override fun update(book: Book): Mono<Book> {
-        val id = book.id!!
-
-        bookRepository.existsById(book.id)
-            .doOnNext { exists ->
-                if (exists.not())
-                    throw IllegalArgumentException("Book with id = $id not found")
+    override fun update(book: Book): Mono<Book> =
+        repository.existsById(book.id!!)
+            .flatMap { exists ->
+                if (exists) repository.save(book)
+                else Mono.error(IllegalArgumentException("Book with id = ${book.id} not found"))
             }
 
-        return bookRepository.save(book)
-    }
-
-    override fun delete(id: String) = bookRepository.deleteById(id)
+    override fun delete(id: String) = repository.deleteById(id)
 }

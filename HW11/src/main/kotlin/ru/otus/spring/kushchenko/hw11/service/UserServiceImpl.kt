@@ -15,27 +15,24 @@ class UserServiceImpl(private val repository: UserRepository) : UserService {
     override fun getAll(): Flux<User> = repository.findAll()
 
     override fun get(id: String): Mono<User> = repository.findById(id)
-        .doOnNext { exists ->
-            exists ?: throw IllegalArgumentException("User with id = $id not found")
-        }
+        .switchIfEmpty(Mono.error(IllegalArgumentException("User with id = $id not found")))
 
-    override fun create(user: User): Mono<User> {
-//        user.id?.let {
-//            if (repository.existsById(it))
-//                throw IllegalArgumentException("User with id = $it already exists")
-//        }
+    override fun create(user: User): Mono<User> =
+        Mono.just(user.id != null)
+            .filter { presented -> presented }
+            .flatMap {
+                repository.existsById(user.id!!)
+                    .filter { exists -> exists }
+                    .flatMap { Mono.error<User>(IllegalArgumentException("User with id = ${user.id} already exists")) }
+            }
+            .switchIfEmpty(repository.save(user))
 
-        return repository.save(user)
-    }
-
-    override fun update(user: User): Mono<User> {
-        val id = user.id!!
-//
-//        if (repository.existsById(id).not())
-//            throw IllegalArgumentException("User with id = $id not found")
-
-        return repository.save(user)
-    }
+    override fun update(user: User): Mono<User> =
+        repository.existsById(user.id!!)
+            .flatMap { exists ->
+                if (exists) repository.save(user)
+                else Mono.error(IllegalArgumentException("User with id = ${user.id} not found"))
+            }
 
     override fun delete(id: String) = repository.deleteById(id)
 }
