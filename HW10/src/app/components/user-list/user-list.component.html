@@ -1,0 +1,22 @@
+<div class="container">
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.id}}</td>
+      <td>{{user.name}}</td>
+      <td class="table-controls">
+        <a (click)="openEditorComponent(user)"><i class="fas fa-pen text-info"></i></a>
+        <a (click)="openConfirmationComponent(user.id)"><i class="fas fa-trash text-info"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="button" (click)="openEditorComponent(null)" class="btn btn-info">Add user</button>
+</div>

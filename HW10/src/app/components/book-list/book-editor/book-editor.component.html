@@ -1,0 +1,55 @@
+<div class="alert-box">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Edit book</h5>
+      <button type="button" (click)="bsModalRef.hide()" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="bookName">Name</label>
+        <input type="text" [(ngModel)]="book.name" class="form-control" id="bookName" required>
+      </div>
+      <div class="form-group">
+        <label for="originalName">Original Name</label>
+        <input type="text" [(ngModel)]="book.originalName" class="form-control" id="originalName">
+      </div>
+      <div class="form-group">
+        <label for="paperback">Paperback</label>
+        <input type="number" [(ngModel)]="book.paperback" class="form-control" id="paperback" min="1" step="1"
+               pattern="\\d+">
+      </div>
+      <div class="form-group dropdown-group">
+        <label for="authors">Authors</label>
+        <div class="btn-group" id="authors" dropdown>
+          <button id="authors-button" dropdownToggle type="button" class="btn btn-light dropdown-btn"
+                  aria-controls="authors-dropdown">{{joinToString(book.authors)}}
+          </button>
+          <ul id="authors-dropdown" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="authors-button">
+            <li role="menuitem" *ngFor="let author of authors" (click)="selectAuthor(author)" [class]="isAuthorSelected(author) ? 'item-selected' : ''"><a
+              class="dropdown-item">{{author.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group dropdown-group">
+        <label for="genres">Genres</label>
+        <div class="btn-group" id="genres" dropdown>
+          <button id="genres-button" dropdownToggle type="button" class="btn btn-light dropdown-btn"
+                  aria-controls="genres-dropdown">{{joinToString(book.genres)}}
+          </button>
+          <ul id="genres-dropdown" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="genres-button">
+            <li role="menuitem" *ngFor="let genre of genres" (click)="selectGenre(genre)" [class]="isGenreSelected(genre) ? 'item-selected' : ''"><a
+              class="dropdown-item">{{genre.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" (click)="onCancel()" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      <button type="button" (click)="onConfirm()" class="btn btn-info">Save</button>
+    </div>
+  </div>
+</div>
