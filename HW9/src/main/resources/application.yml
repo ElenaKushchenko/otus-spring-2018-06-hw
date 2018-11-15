@@ -1,0 +1,18 @@
+logging:
+  level:
+    ru.otus.spring.kushchenko: INFO
+    org.springframework: WARN
+  file: logs/app.log
+  pattern.file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n'
+
+server:
+  port: 8877
+  servlet:
+    context-path: /library
+
+spring:
+  data.mongodb.uri: mongodb+srv://otus-spring:12345@sandbox-cg92x.mongodb.net/library-hw9?retryWrites=true
+
+  thymeleaf:
+    prefix: classpath:/static/
+    cache: false
