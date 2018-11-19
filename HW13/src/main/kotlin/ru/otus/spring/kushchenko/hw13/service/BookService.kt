@@ -17,5 +17,6 @@ interface BookService {
     fun create(book: Book): Book
     @PreAuthorize("hasRole('ADMIN')")
     fun update(book: Book): Book
+    @PreAuthorize("hasRole('ADMIN')")
     fun delete(id: String)
 }

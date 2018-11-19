@@ -47,12 +47,12 @@ class BookController(private val service: BookService) {
         )
 
         service.create(book)
-        return getAll(model)
+        return "redirect:/books"
     }
 
     @GetMapping("/{id}/delete")
     fun delete(@PathVariable("id") id: String, model: Model): String {
         service.delete(id)
-        return getAll(model)
+        return "redirect:/books"
     }
 }
