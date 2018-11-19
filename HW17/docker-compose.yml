@@ -1,0 +1,17 @@
+version: '3'
+services:
+  library-app:
+    build: .
+    ports:
+      - 8877:8877
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: "mongodb://mongo:27017/db"
+
+  mongo:
+    image: mongo:latest
+    ports:
+    - 27017
