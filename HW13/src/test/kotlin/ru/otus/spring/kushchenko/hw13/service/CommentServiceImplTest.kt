@@ -1,9 +1,11 @@
 package ru.otus.spring.kushchenko.hw13.service
 
+import com.nhaarman.mockito_kotlin.reset
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
 import com.nhaarman.mockito_kotlin.whenever
 import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -27,6 +29,11 @@ class CommentServiceImplTest {
     private lateinit var bookRepository: BookRepository
     @Autowired
     private lateinit var service: CommentService
+
+    @AfterEach
+    fun clean() {
+        reset(bookRepository)
+    }
 
     @Nested
     @DisplayName("Tests for create() method")
