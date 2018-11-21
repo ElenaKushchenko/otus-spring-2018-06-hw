@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.otus.spring.kushchenko.hw15.gateway.BookGateway
-import ru.otus.spring.kushchenko.hw15.model.ShortBook
+import ru.otus.spring.kushchenko.hw15.model.Book
 
 /**
  * Created by Елена on Июль, 2018
@@ -15,6 +15,6 @@ import ru.otus.spring.kushchenko.hw15.model.ShortBook
 class BookController(private val bookGateway: BookGateway) {
 
     @GetMapping
-    fun getAll(): List<ShortBook> =
+    fun getAll(): List<Book> =
         bookGateway.getAll(MessageBuilder.withPayload("getAllStatements").build())
 }

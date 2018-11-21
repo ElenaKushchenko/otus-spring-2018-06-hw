@@ -5,7 +5,6 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.otus.spring.kushchenko.hw15.model.Book
-import ru.otus.spring.kushchenko.hw15.model.ShortBook
 import ru.otus.spring.kushchenko.hw15.repository.BookRepository
 
 /**
@@ -13,16 +12,16 @@ import ru.otus.spring.kushchenko.hw15.repository.BookRepository
  */
 @Service
 class BookServiceImpl(private val bookRepository: BookRepository) : BookService {
-    override fun getAll(): List<ShortBook> = bookRepository.findAllShortBooks()
+    override fun getAll(): List<Book> = bookRepository.findAll()
 
-    override fun getPaged(page: Int, size: Int, sortBy: String, dir: String): Page<ShortBook> {
+    override fun getPaged(page: Int, size: Int, sortBy: String, dir: String): Page<Book> {
         val pageable = PageRequest.of(
             page - 1,
             size,
             Sort(Sort.Direction.valueOf(dir), sortBy)
         )
 
-        return bookRepository.findPagedShortBooks(pageable)
+        return bookRepository.findAll(pageable)
     }
 
     override fun get(id: String): Book = bookRepository.findById(id)

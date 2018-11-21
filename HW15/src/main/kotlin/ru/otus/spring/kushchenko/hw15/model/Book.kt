@@ -13,6 +13,7 @@ data class Book(
     val name: String,
     val originalName: String? = null,
     val paperback: Int? = null,
+    var status: Status? = null,
     val authors: List<String>? = emptyList(),
     val genres: List<String>? = emptyList(),
     val comments: List<Comment>? = emptyList()
