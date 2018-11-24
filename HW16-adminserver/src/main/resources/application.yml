@@ -1,0 +1,14 @@
+logging:
+  level:
+    ru.otus.spring.kushchenko: INFO
+    org.springframework: WARN
+  file: logs/app.log
+  pattern.file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n'
+
+server.port: 9977
+
+management:
+  endpoints:
+    web.exposure.include: "*"
+  endpoint:
+    health.show-details: AlWAYS
